@@ -129,4 +129,106 @@
 		},
 		save: function () { return null; }
 	} );
+	/* Announcement Ticker */
+	registerBlockType( 'hch/ticker', {
+		edit: function () {
+			return el( 'div', { className: 'hch-block-preview' },
+				el( ServerSideRender, {
+					block: 'hch/ticker',
+					EmptyResponsePlaceholder: function () {
+						return el( 'div', { style: { padding: '8px 16px', background: '#00e5ff', color: '#0a0e14', fontSize: '12px', fontFamily: 'DM Mono, monospace' } },
+							__( 'Ticker — add lines in Customizer → HCH Electric → Top Ticker', 'hch-electric' )
+						);
+					}
+				} )
+			);
+		},
+		save: function () { return null; }
+	} );
+
+	/* Search Form */
+	registerBlockType( 'hch/search-form', {
+		edit: function () {
+			return el( 'div', { className: 'hch-block-preview' },
+				el( ServerSideRender, {
+					block: 'hch/search-form',
+					EmptyResponsePlaceholder: function () {
+						return el( 'div', { style: { padding: '8px 16px', background: '#1a2030', color: 'rgba(255,255,255,0.5)', fontSize: '12px', fontFamily: 'DM Mono, monospace', borderRadius: '4px' } },
+							__( 'Product Search Form', 'hch-electric' )
+						);
+					}
+				} )
+			);
+		},
+		save: function () { return null; }
+	} );
+
+	/* Cart Button */
+	registerBlockType( 'hch/cart-button', {
+		edit: function () {
+			return el( 'div', { className: 'hch-block-preview' },
+				el( ServerSideRender, {
+					block: 'hch/cart-button',
+					EmptyResponsePlaceholder: function () {
+						return el( 'div', { style: { padding: '8px 16px', background: '#1a2030', color: '#00e5ff', fontSize: '12px', fontFamily: 'DM Mono, monospace', borderRadius: '4px' } },
+							__( 'Cart Button (requires WooCommerce)', 'hch-electric' )
+						);
+					}
+				} )
+			);
+		},
+		save: function () { return null; }
+	} );
+
+	/* Footer Categories */
+	registerBlockType( 'hch/footer-categories', {
+		edit: function () {
+			return el( 'div', { className: 'hch-block-preview' },
+				el( ServerSideRender, {
+					block: 'hch/footer-categories',
+					EmptyResponsePlaceholder: function () {
+						return el( 'div', { style: { padding: '8px 16px', color: 'rgba(255,255,255,0.45)', fontSize: '12px', fontFamily: 'DM Mono, monospace' } },
+							__( 'Footer Categories — add WooCommerce product categories to populate.', 'hch-electric' )
+						);
+					}
+				} )
+			);
+		},
+		save: function () { return null; }
+	} );
+
+	/* Footer Contact */
+	registerBlockType( 'hch/footer-contact', {
+		edit: function () {
+			return el( 'div', { className: 'hch-block-preview' },
+				el( ServerSideRender, {
+					block: 'hch/footer-contact',
+					EmptyResponsePlaceholder: function () {
+						return el( 'div', { style: { padding: '8px 16px', color: 'rgba(255,255,255,0.45)', fontSize: '12px', fontFamily: 'DM Mono, monospace' } },
+							__( 'Footer Contact — edit in Appearance → Menus (Footer Contact).', 'hch-electric' )
+						);
+					}
+				} )
+			);
+		},
+		save: function () { return null; }
+	} );
+
+	/* Footer Bottom Bar */
+	registerBlockType( 'hch/footer-bottom', {
+		edit: function () {
+			return el( 'div', { className: 'hch-block-preview' },
+				el( ServerSideRender, {
+					block: 'hch/footer-bottom',
+					EmptyResponsePlaceholder: function () {
+						return el( 'div', { style: { padding: '8px 16px', color: 'rgba(255,255,255,0.45)', fontSize: '12px', fontFamily: 'DM Mono, monospace' } },
+							__( 'Footer Bottom Bar — copyright & disclaimer from Customizer.', 'hch-electric' )
+						);
+					}
+				} )
+			);
+		},
+		save: function () { return null; }
+	} );
+
 } )( window.wp );

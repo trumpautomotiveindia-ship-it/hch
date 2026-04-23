@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "hch/cart-button",
+	"version": "1.0.0",
+	"title": "HCH Cart Button",
+	"category": "hch-electric",
+	"icon": "cart",
+	"description": "Cyan cart icon button with live product count. Opens the off-canvas cart drawer.",
+	"keywords": ["cart", "basket", "woocommerce", "hch"],
+	"textdomain": "hch-electric",
+	"supports": { "html": false, "reusable": true },
+	"attributes": {},
+	"example": {},
+	"editorScript": "hch-blocks-editor"
+}

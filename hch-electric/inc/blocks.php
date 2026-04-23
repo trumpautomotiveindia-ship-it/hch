@@ -69,6 +69,26 @@ function hch_register_blocks() {
 	register_block_type( HCH_DIR . '/blocks/category-sections', array(
 		'render_callback' => 'hch_block_render_category_sections',
 	) );
+
+	/* Header / footer dynamic blocks */
+	register_block_type( HCH_DIR . '/blocks/ticker', array(
+		'render_callback' => 'hch_block_render_ticker',
+	) );
+	register_block_type( HCH_DIR . '/blocks/search-form', array(
+		'render_callback' => 'hch_block_render_search_form',
+	) );
+	register_block_type( HCH_DIR . '/blocks/cart-button', array(
+		'render_callback' => 'hch_block_render_cart_button',
+	) );
+	register_block_type( HCH_DIR . '/blocks/footer-categories', array(
+		'render_callback' => 'hch_block_render_footer_categories',
+	) );
+	register_block_type( HCH_DIR . '/blocks/footer-contact', array(
+		'render_callback' => 'hch_block_render_footer_contact',
+	) );
+	register_block_type( HCH_DIR . '/blocks/footer-bottom', array(
+		'render_callback' => 'hch_block_render_footer_bottom',
+	) );
 }
 add_action( 'init', 'hch_register_blocks' );
 
@@ -214,4 +234,46 @@ function hch_block_render_category_sections( $attrs = array(), $content = '' ) {
 	</section>
 	<?php
 	return ob_get_clean();
+}
+
+function hch_block_render_ticker( $attrs = array(), $content = '' ) {
+	if ( function_exists( 'hch_ticker_shortcode' ) ) {
+		return hch_ticker_shortcode();
+	}
+	return '';
+}
+
+function hch_block_render_search_form( $attrs = array(), $content = '' ) {
+	if ( function_exists( 'hch_search_form_shortcode' ) ) {
+		return hch_search_form_shortcode();
+	}
+	return '';
+}
+
+function hch_block_render_cart_button( $attrs = array(), $content = '' ) {
+	if ( function_exists( 'hch_cart_button_shortcode' ) ) {
+		return hch_cart_button_shortcode();
+	}
+	return '';
+}
+
+function hch_block_render_footer_categories( $attrs = array(), $content = '' ) {
+	if ( function_exists( 'hch_footer_categories_shortcode' ) ) {
+		return hch_footer_categories_shortcode();
+	}
+	return '';
+}
+
+function hch_block_render_footer_contact( $attrs = array(), $content = '' ) {
+	if ( function_exists( 'hch_footer_contact_shortcode' ) ) {
+		return hch_footer_contact_shortcode();
+	}
+	return '';
+}
+
+function hch_block_render_footer_bottom( $attrs = array(), $content = '' ) {
+	if ( function_exists( 'hch_footer_bottom_shortcode' ) ) {
+		return hch_footer_bottom_shortcode();
+	}
+	return '';
 }

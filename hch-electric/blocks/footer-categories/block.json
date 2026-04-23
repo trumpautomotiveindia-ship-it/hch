@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "hch/footer-categories",
+	"version": "1.0.0",
+	"title": "HCH Footer Categories",
+	"category": "hch-electric",
+	"icon": "category",
+	"description": "Footer column listing WooCommerce product categories with links.",
+	"keywords": ["footer", "categories", "woocommerce", "hch"],
+	"textdomain": "hch-electric",
+	"supports": { "html": false, "reusable": true },
+	"attributes": {},
+	"example": {},
+	"editorScript": "hch-blocks-editor"
+}

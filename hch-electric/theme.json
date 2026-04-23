@@ -1,0 +1,205 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+    "version": 2,
+    "settings": {
+        "appearanceTools": true,
+        "useRootPaddingAwareAlignments": true,
+        "color": {
+            "palette": [
+                { "slug": "dark",       "color": "#090C0E", "name": "Dark" },
+                { "slug": "dark-2",     "color": "#101418", "name": "Dark 2" },
+                { "slug": "dark-3",     "color": "#161B20", "name": "Dark 3" },
+                { "slug": "cyan",       "color": "#00C8FF", "name": "Cyan" },
+                { "slug": "green",      "color": "#00E87A", "name": "Green" },
+                { "slug": "card",       "color": "#F2F5F7", "name": "Card" },
+                { "slug": "ink",        "color": "#0B0E11", "name": "Ink" },
+                { "slug": "ink-light",  "color": "#9EA4AD", "name": "Ink Light" },
+                { "slug": "white",      "color": "#FFFFFF", "name": "White" }
+            ],
+            "custom": true,
+            "customGradient": true,
+            "defaultPalette": false,
+            "defaultGradients": false
+        },
+        "typography": {
+            "fontFamilies": [
+                {
+                    "slug": "syne",
+                    "name": "Syne",
+                    "fontFamily": "'Syne', sans-serif"
+                },
+                {
+                    "slug": "outfit",
+                    "name": "Outfit",
+                    "fontFamily": "'Outfit', sans-serif"
+                },
+                {
+                    "slug": "dm-mono",
+                    "name": "DM Mono",
+                    "fontFamily": "'DM Mono', monospace"
+                }
+            ],
+            "fontSizes": [
+                { "slug": "xs",    "size": "10px",  "name": "XS" },
+                { "slug": "small", "size": "12.5px","name": "Small" },
+                { "slug": "base",  "size": "15px",  "name": "Base" },
+                { "slug": "large", "size": "22px",  "name": "Large" },
+                { "slug": "xl",    "size": "32px",  "name": "XL" },
+                { "slug": "xxl",   "size": "52px",  "name": "XXL" }
+            ],
+            "customFontSize": true,
+            "dropCap": false,
+            "fluid": true
+        },
+        "spacing": {
+            "padding": true,
+            "margin": true,
+            "blockGap": true,
+            "units": ["px", "rem", "em", "%", "vw"]
+        },
+        "layout": {
+            "contentSize": "820px",
+            "wideSize": "1280px"
+        },
+        "blocks": {
+            "core/site-logo": {
+                "color": {
+                    "custom": true
+                }
+            }
+        }
+    },
+    "styles": {
+        "color": {
+            "background": "#090C0E",
+            "text": "#FFFFFF"
+        },
+        "typography": {
+            "fontFamily": "'Outfit', sans-serif",
+            "fontSize": "15px",
+            "lineHeight": "1.55"
+        },
+        "spacing": {
+            "blockGap": "0px"
+        },
+        "elements": {
+            "link": {
+                "color": { "text": "#00C8FF" },
+                ":hover": {
+                    "color": { "text": "#1DD4FF" }
+                }
+            },
+            "h1": {
+                "typography": {
+                    "fontFamily": "'Syne', sans-serif",
+                    "fontWeight": "800",
+                    "letterSpacing": "-0.025em"
+                }
+            },
+            "h2": {
+                "typography": {
+                    "fontFamily": "'Syne', sans-serif",
+                    "fontWeight": "800"
+                }
+            },
+            "h3": {
+                "typography": {
+                    "fontFamily": "'Syne', sans-serif",
+                    "fontWeight": "700"
+                }
+            },
+            "h4": {
+                "typography": {
+                    "fontFamily": "'DM Mono', monospace",
+                    "fontWeight": "500",
+                    "letterSpacing": "0.1em",
+                    "textTransform": "uppercase"
+                },
+                "color": { "text": "rgba(255,255,255,0.22)" }
+            },
+            "button": {
+                "color": { "background": "#00C8FF", "text": "#090C0E" },
+                "typography": {
+                    "fontFamily": "'Syne', sans-serif",
+                    "fontWeight": "700"
+                },
+                "border": {
+                    "radius": "8px"
+                }
+            }
+        },
+        "blocks": {
+            "core/search": {
+                "color": {
+                    "text": "#FFFFFF",
+                    "background": "rgba(255,255,255,0.05)"
+                },
+                "border": {
+                    "color": "rgba(255,255,255,0.06)",
+                    "radius": "8px"
+                }
+            },
+            "core/navigation": {
+                "typography": {
+                    "fontFamily": "'Outfit', sans-serif",
+                    "fontSize": "12.5px"
+                },
+                "color": {
+                    "text": "rgba(255,255,255,0.38)"
+                }
+            },
+            "core/site-logo": {
+                "spacing": {
+                    "margin": { "right": "0" }
+                }
+            }
+        }
+    },
+    "templateParts": [
+        {
+            "name": "header",
+            "title": "Header",
+            "area": "header"
+        },
+        {
+            "name": "footer",
+            "title": "Footer",
+            "area": "footer"
+        }
+    ],
+    "customTemplates": [
+        {
+            "name": "home",
+            "title": "Homepage",
+            "postTypes": ["page"]
+        },
+        {
+            "name": "page",
+            "title": "Page",
+            "postTypes": ["page"]
+        },
+        {
+            "name": "single",
+            "title": "Single Post",
+            "postTypes": ["post"]
+        },
+        {
+            "name": "single-product",
+            "title": "Single Product",
+            "postTypes": ["product"]
+        },
+        {
+            "name": "archive-product",
+            "title": "Shop / Product Archive",
+            "postTypes": ["page"]
+        },
+        {
+            "name": "404",
+            "title": "404 Not Found"
+        },
+        {
+            "name": "search",
+            "title": "Search Results"
+        }
+    ]
+}

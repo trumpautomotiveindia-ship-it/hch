@@ -1,0 +1,28 @@
+<!-- wp:template-part {"slug":"header","tagName":"header","className":"hch-header"} /-->
+
+<!-- wp:group {"tagName":"main","className":"hch-main","style":{"spacing":{"padding":{"top":"0","bottom":"0"}}},"layout":{"type":"constrained"}} -->
+<main class="wp-block-group hch-main">
+	<!-- wp:query-title {"type":"archive","className":"hch-page-title"} /-->
+	<!-- wp:term-description /-->
+
+	<!-- wp:query {"queryId":0,"query":{"perPage":12,"offset":0,"postType":"post","inherit":true}} -->
+	<div class="wp-block-query">
+		<!-- wp:post-template -->
+			<!-- wp:group {"className":"hch-archive-item","layout":{"type":"constrained"}} -->
+			<div class="wp-block-group hch-archive-item">
+				<!-- wp:post-title {"isLink":true} /-->
+				<!-- wp:post-excerpt /-->
+			</div>
+			<!-- /wp:group -->
+		<!-- /wp:post-template -->
+		<!-- wp:query-pagination -->
+			<!-- wp:query-pagination-previous /-->
+			<!-- wp:query-pagination-numbers /-->
+			<!-- wp:query-pagination-next /-->
+		<!-- /wp:query-pagination -->
+	</div>
+	<!-- /wp:query -->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer","className":"hch-footer"} /-->

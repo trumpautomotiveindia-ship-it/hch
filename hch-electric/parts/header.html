@@ -1,0 +1,21 @@
+<!-- wp:shortcode -->[hch_ticker]<!-- /wp:shortcode -->
+
+<!-- wp:group {"className":"hch-header__inner","layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","alignItems":"center"}} -->
+<div class="wp-block-group hch-header__inner">
+
+	<!-- wp:site-logo {"width":200,"className":"hch-logo","shouldSyncIcon":false} /-->
+
+	<!-- wp:search {"label":"Search","buttonText":"Search","showLabel":false,"className":"hch-search","buttonPosition":"button-inside","buttonUseIcon":true,"query":{"post_type":"product"}} /-->
+
+	<!-- wp:html -->
+	<button type="button" class="hch-cart-btn" id="hchCartBtn" aria-label="Open cart">
+		<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+			<circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+			<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+		</svg>
+		<span class="hch-cart-btn__count" id="hchCartCount">0</span>
+	</button>
+	<!-- /wp:html -->
+
+</div>
+<!-- /wp:group -->

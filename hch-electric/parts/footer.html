@@ -1,4 +1,4 @@
-<!-- wp:group {"className":"hch-footer__inner","layout":{"type":"constrained"}} -->
+<!-- wp:group {"className":"hch-footer__inner","layout":{"type":"constrained","wideSize":"1280px"}} -->
 <div class="wp-block-group hch-footer__inner">
 
 	<!-- wp:columns {"className":"hch-footer__grid"} -->
@@ -7,35 +7,23 @@
 		<!-- wp:column {"className":"hch-footer__brand"} -->
 		<div class="wp-block-column hch-footer__brand">
 			<!-- wp:site-logo {"width":120,"shouldSyncIcon":false} /-->
-			<!-- wp:paragraph {"className":"hch-footer__about","style":{"color":{"text":"rgba(255,255,255,0.26)"},"typography":{"fontSize":"12.5px"}}} -->
-			<p class="wp-block-paragraph hch-footer__about" style="color:rgba(255,255,255,0.26);font-size:12.5px">Aftermarket EV spare parts for Indian electric scooters, e-rickshaws &amp; e-cycles.</p>
+			<!-- wp:paragraph -->
+			<p>Aftermarket EV spare parts for Indian electric scooters, e-rickshaws &amp; e-cycles.</p>
 			<!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:column -->
 
 		<!-- wp:column {"className":"hch-footer__col"} -->
 		<div class="wp-block-column hch-footer__col">
-			<!-- wp:heading {"level":4,"className":"hch-footer__col-heading"} -->
-			<h4 class="wp-block-heading hch-footer__col-heading">Categories</h4>
-			<!-- /wp:heading -->
-			<!-- wp:navigation {"overlayMenu":"never","layout":{"type":"flex","orientation":"vertical"},"style":{"typography":{"fontSize":"12.5px"}}} /-->
+			<!-- wp:heading {"level":4} --><h4>Categories</h4><!-- /wp:heading -->
+			<!-- wp:shortcode -->[hch_footer_categories]<!-- /wp:shortcode -->
 		</div>
 		<!-- /wp:column -->
 
 		<!-- wp:column {"className":"hch-footer__col"} -->
 		<div class="wp-block-column hch-footer__col">
-			<!-- wp:heading {"level":4,"className":"hch-footer__col-heading"} -->
-			<h4 class="wp-block-heading hch-footer__col-heading">Contact</h4>
-			<!-- /wp:heading -->
-			<!-- wp:html -->
-			<ul>
-				<li><a href="mailto:hchevinternational@gmail.com">hchevinternational@gmail.com</a></li>
-				<li><span>GST Reg. Business</span></li>
-				<li><span>18% GST on parts</span></li>
-				<li><span>5% GST on chargers</span></li>
-				<li><a href="/privacy-policy/">Privacy Policy</a></li>
-			</ul>
-			<!-- /wp:html -->
+			<!-- wp:heading {"level":4} --><h4>Contact</h4><!-- /wp:heading -->
+			<!-- wp:shortcode -->[hch_footer_contact]<!-- /wp:shortcode -->
 		</div>
 		<!-- /wp:column -->
 
@@ -44,10 +32,7 @@
 
 	<!-- wp:group {"className":"hch-footer__btm","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
 	<div class="wp-block-group hch-footer__btm">
-		<!-- wp:html -->
-		<div class="hch-footer__copy">© 2025 HCH Electric. All rights reserved.</div>
-		<div class="hch-footer__disc">Not affiliated with Ola, Ather, Bajaj, TVS or Hero. Aftermarket parts only.</div>
-		<!-- /wp:html -->
+		<!-- wp:shortcode -->[hch_footer_bottom]<!-- /wp:shortcode -->
 	</div>
 	<!-- /wp:group -->
 

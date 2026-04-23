@@ -940,15 +940,10 @@ body.hch-canvas{background:var(--dark);}
 /* Editor previews */
 .hch-block-preview{background:#090C0E;padding:2px;border-radius:8px;overflow:hidden;}
 
-/* WP ADMIN BAR OFFSET */
+/* WP ADMIN BAR OFFSET (classic theme context — block theme offsets are below) */
 .admin-bar .hch-header{top:32px;}
-.admin-bar .hch-catbar-wrap{top:calc(58px + 32px);}
 @media(max-width:782px){
   .admin-bar .hch-header{top:46px;}
-  .admin-bar .hch-catbar-wrap{top:calc(58px + 46px);}
-}
-@media(max-width:600px){
-  .admin-bar .hch-catbar-wrap{top:calc(54px + 46px);}
 }
 
 /* ═══════════════════════════════════════
@@ -1148,10 +1143,132 @@ footer.wp-block-template-part.hch-footer{
 }
 
 /* Single product page */
-.hch-single-product .woocommerce{
+.hch-single-product .woocommerce,
+.hch-single-product > .woocommerce{
 	max-width:1280px;
 	margin:0 auto;
 	padding:0 16px;
+}
+/* WooCommerce single product inside our block template */
+.hch-single-product .hch-single{max-width:1280px;margin:0 auto;padding:0 16px;}
+
+/* Hero stats: when using wp:columns, override default column flex */
+.hch-hero__stats.wp-block-columns{
+	display:flex !important;
+	gap:0;
+	padding-top:24px;
+	border-top:1px solid var(--border-dark);
+	margin-top:0;
+	flex-wrap:nowrap;
+}
+.hch-hero__stats .wp-block-column.hch-hero__stat{
+	flex:1;
+	padding-right:16px;
+	border-right:1px solid var(--border-dark);
+	margin-right:16px;
+	margin-bottom:0 !important;
+}
+.hch-hero__stats .wp-block-column.hch-hero__stat:last-child{
+	border-right:none;
+	margin-right:0;
+	padding-right:0;
+}
+/* Stat heading/paragraph inside wp:column */
+.hch-hero__stat .hch-hero__stat-num{
+	font-family:var(--f-head);
+	font-size:22px;
+	font-weight:800;
+	color:#fff;
+	line-height:1;
+	margin-bottom:3px;
+}
+.hch-hero__stat .hch-hero__stat-num span{color:var(--cyan);}
+.hch-hero__stat .hch-hero__stat-label{
+	font-family:var(--f-mono);
+	font-size:9px;
+	letter-spacing:.12em;
+	color:rgba(255,255,255,.28);
+	text-transform:uppercase;
+	margin:0;
+}
+/* Hero kicker as paragraph block */
+.hch-hero__kicker.wp-block-paragraph{
+	display:inline-flex;
+	align-items:center;
+	gap:8px;
+	font-family:var(--f-mono);
+	font-size:10px;
+	letter-spacing:.12em;
+	color:var(--cyan);
+	margin-bottom:10px;
+}
+.hch-hero__kicker.wp-block-paragraph::before{
+	content:'';width:18px;height:1px;background:var(--cyan);
+}
+/* Hero heading as wp:heading block */
+.hch-hero__h1.wp-block-heading{
+	font-family:var(--f-head);
+	font-size:clamp(26px,7vw,52px);
+	font-weight:800;
+	line-height:1.05;
+	letter-spacing:-.025em;
+	color:#fff;
+	margin-bottom:10px;
+}
+/* Hero sub as wp:paragraph block */
+.hch-hero__sub.wp-block-paragraph{
+	font-size:13.5px;
+	color:rgba(255,255,255,.38);
+	line-height:1.65;
+	max-width:460px;
+	margin:0;
+}
+/* Footer brand paragraph */
+.hch-footer__brand .wp-block-paragraph{
+	font-size:12.5px;
+	color:rgba(255,255,255,.26);
+	line-height:1.6;
+	margin-top:12px;
+	max-width:240px;
+}
+/* Ensure footer heading (h4) inside wp:heading gets mono styling */
+.hch-footer__col .wp-block-heading{
+	font-family:var(--f-mono);
+	font-size:9.5px;
+	letter-spacing:.12em;
+	color:rgba(255,255,255,.2);
+	margin-bottom:12px;
+	text-transform:uppercase;
+}
+/* WooCommerce archive inside block template — remove duplicate main wrapper */
+.hch-shop + .hch-shop{display:none;}
+/* hch-shop inside hch-main — ensure correct spacing */
+.hch-main .hch-shop{padding-top:12px;}
+
+/* WooCommerce no-products-found styling */
+.woocommerce-info{
+	background:rgba(255,255,255,.04);
+	border-top:3px solid var(--cyan);
+	color:rgba(255,255,255,.5);
+	padding:1em 1.618em;
+	margin:1.617924em 0 0;
+	font-size:13px;
+}
+
+@media(max-width:600px){
+	.hch-hero__stats.wp-block-columns{flex-wrap:wrap;}
+	.hch-hero__stats .wp-block-column.hch-hero__stat{
+		flex:1 0 48%;
+		border-right:none !important;
+		margin-right:0 !important;
+		padding-right:8px;
+		padding-bottom:10px;
+		border-bottom:1px solid var(--border-dark);
+	}
+	.hch-hero__stats .wp-block-column.hch-hero__stat:nth-last-child(-n+2){
+		border-bottom:none;
+		padding-bottom:0;
+	}
 }
 
 /* Query pagination styling */
@@ -1182,12 +1299,20 @@ footer.wp-block-template-part.hch-footer{
 	header.hch-header .wp-block-search{max-width:none;}
 }
 
-/* Prevent double sticky when both block header and catbar are sticky */
+/* Catbar sticks below the block-theme sticky header.
+   Header = ticker (~30px) + inner (58px) ≈ 88px total. */
 .hch-catbar-wrap{
 	position:sticky;
-	top:58px;
+	top:88px;
 	z-index:299;
 }
 @media(max-width:600px){
-	.hch-catbar-wrap{top:54px;}
+	.hch-catbar-wrap{top:84px;}
 }
+.admin-bar .hch-catbar-wrap{top:calc(88px + 32px);}
+@media(max-width:782px){
+	.admin-bar .hch-catbar-wrap{top:calc(84px + 46px);}
+}
+
+/* Remove old catbar offset rules that used 58px */
+/* (overridden above) */

@@ -266,8 +266,7 @@ add_action( 'wp_footer', 'hch_output_cart_drawer', 5 );
 
 /**
  * Tell WordPress this is a block theme by declaring template parts for the
- * Site Editor. Also suppress WooCommerce's own block templates so our custom
- * PHP WooCommerce overrides are respected.
+ * Site Editor.
  */
 function hch_block_theme_support() {
 	add_theme_support( 'block-template-parts' );
@@ -285,3 +284,167 @@ add_filter( 'woocommerce_add_to_cart_fragments', function( $fragments ) {
 	$fragments['span#hchCartCount'] = '<span class="hch-cart-btn__count" id="hchCartCount">' . $count . '</span>';
 	return $fragments;
 } );
+
+/**
+ * Shortcode: [hch_search_form]
+ * WooCommerce-aware search form — filters by post_type=product when WooCommerce
+ * is active. Used in parts/header.html so it works in block templates.
+ */
+function hch_search_form_shortcode() {
+	ob_start(); ?>
+	<form role="search" method="get" class="hch-search" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+		<span class="hch-search__ico">⌕</span>
+		<input class="hch-search__input" type="search" name="s"
+			value="<?php echo esc_attr( get_search_query() ); ?>"
+			placeholder="<?php esc_attr_e( 'Search parts, specs, SKUs…', 'hch-electric' ); ?>"
+			autocomplete="off"/>
+		<?php if ( class_exists( 'WooCommerce' ) ) : ?>
+			<input type="hidden" name="post_type" value="product"/>
+		<?php endif; ?>
+	</form>
+	<?php
+	return ob_get_clean();
+}
+add_shortcode( 'hch_search_form', 'hch_search_form_shortcode' );
+
+/**
+ * Shortcode: [hch_cart_button]
+ * Cart icon button with live PHP-rendered count. Placed in the block-theme
+ * header part so the initial count is correct (JS updates it live thereafter).
+ */
+function hch_cart_button_shortcode() {
+	$count = 0;
+	if ( function_exists( 'WC' ) && WC()->cart ) {
+		$count = (int) WC()->cart->get_cart_contents_count();
+	}
+	ob_start(); ?>
+	<button type="button" class="hch-cart-btn" id="hchCartBtn"
+		aria-label="<?php esc_attr_e( 'Open cart', 'hch-electric' ); ?>">
+		<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+			<circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+			<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+		</svg>
+		<span class="hch-cart-btn__count" id="hchCartCount"><?php echo $count; ?></span>
+	</button>
+	<?php
+	return ob_get_clean();
+}
+add_shortcode( 'hch_cart_button', 'hch_cart_button_shortcode' );
+
+/**
+ * Shortcode: [hch_wc_archive]
+ * Renders the WooCommerce product loop using the current main query (which
+ * WooCommerce has already filtered for search, categories, etc.).
+ * Used in archive-product.html and taxonomy-product_cat.html.
+ */
+function hch_wc_archive_shortcode() {
+	if ( ! class_exists( 'WooCommerce' ) ) {
+		return '';
+	}
+	ob_start();
+	if ( have_posts() ) {
+		woocommerce_product_loop_start();
+		while ( have_posts() ) {
+			the_post();
+			wc_get_template_part( 'content', 'product' );
+		}
+		woocommerce_product_loop_end();
+		do_action( 'woocommerce_after_shop_loop' );
+		wp_reset_postdata();
+	} else {
+		do_action( 'woocommerce_no_products_found' );
+	}
+	return ob_get_clean();
+}
+add_shortcode( 'hch_wc_archive', 'hch_wc_archive_shortcode' );
+
+/**
+ * Shortcode: [hch_wc_single]
+ * Renders the full WooCommerce single product page (gallery, summary, tabs,
+ * reviews) using the plugin's content-single-product.php template.
+ * Used in single-product.html.
+ */
+function hch_wc_single_shortcode() {
+	if ( ! class_exists( 'WooCommerce' ) || ! is_singular( 'product' ) ) {
+		return '';
+	}
+	ob_start();
+	while ( have_posts() ) {
+		the_post();
+		wc_get_template_part( 'content', 'single-product' );
+	}
+	wp_reset_postdata();
+	return ob_get_clean();
+}
+add_shortcode( 'hch_wc_single', 'hch_wc_single_shortcode' );
+
+/**
+ * Shortcode: [hch_footer_categories]
+ * Footer column 1: assigned footer-1 nav menu or WooCommerce category list.
+ */
+function hch_footer_categories_shortcode() {
+	ob_start();
+	if ( has_nav_menu( 'footer-1' ) ) {
+		wp_nav_menu( array(
+			'theme_location' => 'footer-1',
+			'container'      => false,
+			'depth'          => 1,
+			'fallback_cb'    => false,
+		) );
+	} elseif ( taxonomy_exists( 'product_cat' ) ) {
+		$terms = get_terms( array( 'taxonomy' => 'product_cat', 'hide_empty' => false, 'number' => 8, 'parent' => 0 ) );
+		if ( ! is_wp_error( $terms ) && $terms ) {
+			echo '<ul>';
+			foreach ( $terms as $t ) {
+				echo '<li><a href="' . esc_url( get_term_link( $t ) ) . '">' . esc_html( $t->name ) . '</a></li>';
+			}
+			echo '</ul>';
+		}
+	}
+	return ob_get_clean();
+}
+add_shortcode( 'hch_footer_categories', 'hch_footer_categories_shortcode' );
+
+/**
+ * Shortcode: [hch_footer_contact]
+ * Footer column 2: assigned footer-2 nav menu or default contact info.
+ */
+function hch_footer_contact_shortcode() {
+	ob_start();
+	if ( has_nav_menu( 'footer-2' ) ) {
+		wp_nav_menu( array(
+			'theme_location' => 'footer-2',
+			'container'      => false,
+			'depth'          => 1,
+			'fallback_cb'    => false,
+		) );
+	} else {
+		$email = get_theme_mod( 'hch_contact_email', 'hchevinternational@gmail.com' );
+		?>
+		<ul>
+			<li><a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></li>
+			<li><span><?php esc_html_e( 'GST Reg. Business', 'hch-electric' ); ?></span></li>
+			<li><span><?php esc_html_e( '18% GST on parts', 'hch-electric' ); ?></span></li>
+			<li><span><?php esc_html_e( '5% GST on chargers', 'hch-electric' ); ?></span></li>
+			<li><a href="<?php echo esc_url( get_privacy_policy_url() ? get_privacy_policy_url() : '#' ); ?>"><?php esc_html_e( 'Privacy Policy', 'hch-electric' ); ?></a></li>
+		</ul>
+		<?php
+	}
+	return ob_get_clean();
+}
+add_shortcode( 'hch_footer_contact', 'hch_footer_contact_shortcode' );
+
+/**
+ * Shortcode: [hch_footer_bottom]
+ * Renders the footer bottom bar: copyright + disclaimer (both Customizer-editable).
+ */
+function hch_footer_bottom_shortcode() {
+	$copy = get_theme_mod( 'hch_footer_copy', sprintf( '© %s HCH Electric. All rights reserved.', gmdate( 'Y' ) ) );
+	$disc = get_theme_mod( 'hch_footer_disc', __( 'Not affiliated with Ola, Ather, Bajaj, TVS or Hero. Aftermarket parts only.', 'hch-electric' ) );
+	ob_start(); ?>
+	<div class="hch-footer__copy"><?php echo esc_html( $copy ); ?></div>
+	<div class="hch-footer__disc"><?php echo esc_html( $disc ); ?></div>
+	<?php
+	return ob_get_clean();
+}
+add_shortcode( 'hch_footer_bottom', 'hch_footer_bottom_shortcode' );

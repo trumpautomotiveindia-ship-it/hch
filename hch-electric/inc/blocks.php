@@ -89,6 +89,12 @@ function hch_register_blocks() {
 	register_block_type( HCH_DIR . '/blocks/footer-bottom', array(
 		'render_callback' => 'hch_block_render_footer_bottom',
 	) );
+	register_block_type( HCH_DIR . '/blocks/wc-archive', array(
+		'render_callback' => 'hch_block_render_wc_archive',
+	) );
+	register_block_type( HCH_DIR . '/blocks/wc-single', array(
+		'render_callback' => 'hch_block_render_wc_single',
+	) );
 }
 add_action( 'init', 'hch_register_blocks' );
 
@@ -274,6 +280,20 @@ function hch_block_render_footer_contact( $attrs = array(), $content = '' ) {
 function hch_block_render_footer_bottom( $attrs = array(), $content = '' ) {
 	if ( function_exists( 'hch_footer_bottom_shortcode' ) ) {
 		return hch_footer_bottom_shortcode();
+	}
+	return '';
+}
+
+function hch_block_render_wc_archive( $attrs = array(), $content = '' ) {
+	if ( function_exists( 'hch_wc_archive_shortcode' ) ) {
+		return hch_wc_archive_shortcode();
+	}
+	return '';
+}
+
+function hch_block_render_wc_single( $attrs = array(), $content = '' ) {
+	if ( function_exists( 'hch_wc_single_shortcode' ) ) {
+		return hch_wc_single_shortcode();
 	}
 	return '';
 }

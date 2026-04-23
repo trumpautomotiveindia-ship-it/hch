@@ -4,7 +4,7 @@ Theme URI: https://hchelectric.com/
 Author: HCH Electric
 Author URI: https://hchelectric.com/
 Description: A premium WooCommerce-ready theme for EV spare parts retailers. Dark, dense, B2B-first layout with sticky category rail, brand attribute filter, off-canvas cart drawer and WhatsApp checkout. Fully editable via the Block Editor (Gutenberg) and the Customizer.
-Version: 1.5.0
+Version: 1.7.0
 Requires at least: 6.2
 Tested up to: 6.5
 Requires PHP: 7.4
@@ -1316,3 +1316,23 @@ footer.wp-block-template-part.hch-footer{
 
 /* Remove old catbar offset rules that used 58px */
 /* (overridden above) */
+
+/* ── Breadcrumbs ─────────────────────────────────────────────────────────── */
+.hch-breadcrumbs{
+	padding:10px 0 6px;
+	font-size:12px;
+	font-family:var(--font-mono);
+	color:rgba(255,255,255,0.4);
+}
+.hch-breadcrumbs__list{
+	list-style:none;
+	margin:0;padding:0;
+	display:flex;flex-wrap:wrap;gap:0;
+}
+.hch-breadcrumbs__item{display:flex;align-items:center;}
+.hch-breadcrumbs a{color:rgba(255,255,255,0.55);text-decoration:none;}
+.hch-breadcrumbs a:hover{color:var(--cyan);}
+.hch-breadcrumbs__sep{margin:0 6px;opacity:.35;}
+
+/* ── SEO: hide duplicate WP title tag (title-tag support handles it) ─────── */
+/* nothing needed — WordPress outputs <title> via wp_head when title-tag support is declared */

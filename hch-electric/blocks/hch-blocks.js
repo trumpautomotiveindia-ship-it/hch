@@ -231,4 +231,24 @@
 		save: function () { return null; }
 	} );
 
+	/* WooCommerce Product Archive */
+	registerBlockType( 'hch/wc-archive', {
+		edit: function () {
+			return el( 'div', { className: 'hch-block-preview', style: { minHeight: '120px', padding: '20px', background: '#0a0e14', color: 'rgba(255,255,255,0.45)', fontSize: '12px', fontFamily: 'DM Mono, monospace', textAlign: 'center', borderRadius: '8px' } },
+				__( 'WooCommerce Product Archive — live preview available on the front end.', 'hch-electric' )
+			);
+		},
+		save: function () { return null; }
+	} );
+
+	/* WooCommerce Single Product */
+	registerBlockType( 'hch/wc-single', {
+		edit: function () {
+			return el( 'div', { className: 'hch-block-preview', style: { minHeight: '120px', padding: '20px', background: '#0a0e14', color: 'rgba(255,255,255,0.45)', fontSize: '12px', fontFamily: 'DM Mono, monospace', textAlign: 'center', borderRadius: '8px' } },
+				__( 'WooCommerce Single Product — live preview available on the front end.', 'hch-electric' )
+			);
+		},
+		save: function () { return null; }
+	} );
+
 } )( window.wp );

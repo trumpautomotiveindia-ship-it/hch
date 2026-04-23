@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'HCH_VERSION', '1.5.0' );
+define( 'HCH_VERSION', '1.7.0' );
 define( 'HCH_DIR', get_template_directory() );
 define( 'HCH_URL', get_template_directory_uri() );
 
@@ -118,6 +118,7 @@ function hch_enqueue() {
 }
 add_action( 'wp_enqueue_scripts', 'hch_enqueue' );
 
+require_once HCH_DIR . '/inc/seo.php';
 require_once HCH_DIR . '/inc/customizer.php';
 require_once HCH_DIR . '/inc/meta-boxes.php';
 require_once HCH_DIR . '/inc/block-patterns.php';

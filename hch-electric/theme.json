@@ -16,10 +16,23 @@
                 { "slug": "ink-light",  "color": "#9EA4AD", "name": "Ink Light" },
                 { "slug": "white",      "color": "#FFFFFF", "name": "White" }
             ],
+            "gradients": [
+                {
+                    "slug": "cyan-green",
+                    "gradient": "linear-gradient(135deg, #00C8FF 0%, #00E87A 100%)",
+                    "name": "Cyan to Green"
+                },
+                {
+                    "slug": "dark-fade",
+                    "gradient": "linear-gradient(180deg, #090C0E 0%, #101418 100%)",
+                    "name": "Dark Fade"
+                }
+            ],
             "custom": true,
             "customGradient": true,
             "defaultPalette": false,
-            "defaultGradients": false
+            "defaultGradients": false,
+            "duotone": []
         },
         "typography": {
             "fontFamilies": [
@@ -45,27 +58,101 @@
                 { "slug": "base",  "size": "15px",  "name": "Base" },
                 { "slug": "large", "size": "22px",  "name": "Large" },
                 { "slug": "xl",    "size": "32px",  "name": "XL" },
-                { "slug": "xxl",   "size": "52px",  "name": "XXL" }
+                { "slug": "xxl",   "size": "52px",  "name": "XXL",
+                  "fluid": { "min": "26px", "max": "52px" } }
             ],
             "customFontSize": true,
             "dropCap": false,
-            "fluid": true
+            "fluid": true,
+            "writingMode": false
         },
         "spacing": {
             "padding": true,
             "margin": true,
             "blockGap": true,
-            "units": ["px", "rem", "em", "%", "vw"]
+            "units": ["px", "rem", "em", "%", "vw"],
+            "spacingSizes": [
+                { "slug": "xs",  "size": "8px",  "name": "XS" },
+                { "slug": "sm",  "size": "16px", "name": "SM" },
+                { "slug": "md",  "size": "24px", "name": "MD" },
+                { "slug": "lg",  "size": "48px", "name": "LG" },
+                { "slug": "xl",  "size": "80px", "name": "XL" },
+                { "slug": "xxl", "size": "120px","name": "XXL" }
+            ]
+        },
+        "border": {
+            "color": true,
+            "radius": true,
+            "style": true,
+            "width": true
+        },
+        "shadow": {
+            "presets": [
+                {
+                    "slug": "card",
+                    "shadow": "0 2px 12px rgba(0,0,0,0.4)",
+                    "name": "Card"
+                },
+                {
+                    "slug": "glow-cyan",
+                    "shadow": "0 0 24px rgba(0,200,255,0.2)",
+                    "name": "Glow Cyan"
+                },
+                {
+                    "slug": "glow-green",
+                    "shadow": "0 0 24px rgba(0,232,122,0.2)",
+                    "name": "Glow Green"
+                }
+            ],
+            "defaultPresets": false
         },
         "layout": {
             "contentSize": "820px",
             "wideSize": "1280px"
         },
+        "custom": {
+            "colors": {
+                "dark":      "#090C0E",
+                "dark-2":    "#101418",
+                "dark-3":    "#161B20",
+                "cyan":      "#00C8FF",
+                "green":     "#00E87A",
+                "card":      "#F2F5F7",
+                "ink":       "#0B0E11",
+                "ink-light": "#9EA4AD",
+                "white":     "#FFFFFF",
+                "border-subtle": "rgba(255,255,255,0.06)",
+                "border-medium": "rgba(255,255,255,0.1)",
+                "border-strong": "rgba(255,255,255,0.2)",
+                "text-muted":    "rgba(255,255,255,0.55)",
+                "text-dim":      "rgba(255,255,255,0.38)"
+            },
+            "font": {
+                "heading": "'Syne', sans-serif",
+                "body":    "'Outfit', sans-serif",
+                "mono":    "'DM Mono', monospace"
+            },
+            "spacing": {
+                "xs":  "8px",
+                "sm":  "16px",
+                "md":  "24px",
+                "lg":  "48px",
+                "xl":  "80px",
+                "xxl": "120px"
+            },
+            "radius": {
+                "sm": "4px",
+                "md": "8px",
+                "lg": "12px",
+                "xl": "20px"
+            }
+        },
         "blocks": {
             "core/site-logo": {
-                "color": {
-                    "custom": true
-                }
+                "color": { "custom": true }
+            },
+            "core/navigation": {
+                "typography": { "customFontSize": true }
             }
         }
     },
@@ -85,9 +172,7 @@
         "elements": {
             "link": {
                 "color": { "text": "#00C8FF" },
-                ":hover": {
-                    "color": { "text": "#1DD4FF" }
-                }
+                ":hover": { "color": { "text": "#1DD4FF" } }
             },
             "h1": {
                 "typography": {
@@ -99,7 +184,8 @@
             "h2": {
                 "typography": {
                     "fontFamily": "'Syne', sans-serif",
-                    "fontWeight": "800"
+                    "fontWeight": "800",
+                    "letterSpacing": "-0.02em"
                 }
             },
             "h3": {
@@ -113,9 +199,26 @@
                     "fontFamily": "'DM Mono', monospace",
                     "fontWeight": "500",
                     "letterSpacing": "0.1em",
-                    "textTransform": "uppercase"
+                    "textTransform": "uppercase",
+                    "fontSize": "11px"
                 },
-                "color": { "text": "rgba(255,255,255,0.22)" }
+                "color": { "text": "rgba(255,255,255,0.38)" }
+            },
+            "h5": {
+                "typography": {
+                    "fontFamily": "'Outfit', sans-serif",
+                    "fontWeight": "600",
+                    "fontSize": "13px"
+                },
+                "color": { "text": "rgba(255,255,255,0.7)" }
+            },
+            "h6": {
+                "typography": {
+                    "fontFamily": "'Outfit', sans-serif",
+                    "fontWeight": "600",
+                    "fontSize": "12px"
+                },
+                "color": { "text": "rgba(255,255,255,0.55)" }
             },
             "button": {
                 "color": { "background": "#00C8FF", "text": "#090C0E" },
@@ -123,19 +226,113 @@
                     "fontFamily": "'Syne', sans-serif",
                     "fontWeight": "700"
                 },
-                "border": {
-                    "radius": "8px"
+                "border": { "radius": "8px" },
+                ":hover": {
+                    "color": { "background": "#1DD4FF" }
                 }
             }
         },
         "blocks": {
+            "core/paragraph": {
+                "color": { "text": "#FFFFFF" },
+                "typography": { "lineHeight": "1.55" }
+            },
+            "core/heading": {
+                "color": { "text": "#FFFFFF" }
+            },
+            "core/list": {
+                "color": { "text": "#FFFFFF" }
+            },
+            "core/image": {
+                "border": { "radius": "8px" }
+            },
+            "core/gallery": {
+                "spacing": { "blockGap": "12px" }
+            },
+            "core/quote": {
+                "border": {
+                    "color": "#00C8FF",
+                    "style": "solid",
+                    "width": "0 0 0 3px"
+                },
+                "spacing": { "padding": { "left": "20px" } },
+                "color": { "text": "rgba(255,255,255,0.75)" }
+            },
+            "core/pullquote": {
+                "border": {
+                    "color": "rgba(255,255,255,0.08)",
+                    "style": "solid",
+                    "width": "2px 0"
+                },
+                "color": { "text": "#FFFFFF" },
+                "typography": {
+                    "fontFamily": "'Syne', sans-serif",
+                    "fontWeight": "700"
+                }
+            },
+            "core/code": {
+                "color": { "background": "#101418", "text": "#00C8FF" },
+                "typography": {
+                    "fontFamily": "'DM Mono', monospace",
+                    "fontSize": "13px"
+                },
+                "border": {
+                    "color": "rgba(255,255,255,0.06)",
+                    "radius": "8px",
+                    "style": "solid",
+                    "width": "1px"
+                }
+            },
+            "core/preformatted": {
+                "color": { "background": "#101418", "text": "#00C8FF" },
+                "typography": {
+                    "fontFamily": "'DM Mono', monospace",
+                    "fontSize": "13px"
+                },
+                "border": {
+                    "color": "rgba(255,255,255,0.06)",
+                    "radius": "8px",
+                    "style": "solid",
+                    "width": "1px"
+                }
+            },
+            "core/table": {
+                "color": { "text": "#FFFFFF" },
+                "border": { "color": "rgba(255,255,255,0.08)" }
+            },
+            "core/separator": {
+                "color": { "background": "rgba(255,255,255,0.08)" }
+            },
+            "core/buttons": {
+                "spacing": { "blockGap": "12px" }
+            },
+            "core/button": {
+                "color": { "background": "#00C8FF", "text": "#090C0E" },
+                "border": { "radius": "8px" }
+            },
+            "core/group": {
+                "color": { "text": "#FFFFFF" }
+            },
+            "core/columns": {
+                "color": { "text": "#FFFFFF" },
+                "spacing": { "blockGap": "24px" }
+            },
+            "core/column": {
+                "color": { "text": "#FFFFFF" }
+            },
+            "core/cover": {
+                "color": { "text": "#FFFFFF" }
+            },
+            "core/media-text": {
+                "color": { "text": "#FFFFFF" }
+            },
             "core/search": {
                 "color": {
                     "text": "#FFFFFF",
                     "background": "rgba(255,255,255,0.05)"
                 },
                 "border": {
-                    "color": "rgba(255,255,255,0.06)",
+                    "color": "rgba(255,255,255,0.08)",
                     "radius": "8px"
                 }
             },
@@ -144,28 +341,64 @@
                     "fontFamily": "'Outfit', sans-serif",
                     "fontSize": "12.5px"
                 },
-                "color": {
-                    "text": "rgba(255,255,255,0.38)"
-                }
+                "color": { "text": "rgba(255,255,255,0.55)" }
+            },
+            "core/site-title": {
+                "typography": {
+                    "fontFamily": "'Syne', sans-serif",
+                    "fontWeight": "800",
+                    "fontSize": "18px"
+                },
+                "color": { "text": "#FFFFFF" }
+            },
+            "core/site-tagline": {
+                "typography": { "fontSize": "12px" },
+                "color": { "text": "rgba(255,255,255,0.45)" }
             },
             "core/site-logo": {
-                "spacing": {
-                    "margin": { "right": "0" }
-                }
+                "spacing": { "margin": { "right": "0" } }
+            },
+            "core/post-title": {
+                "typography": {
+                    "fontFamily": "'Syne', sans-serif",
+                    "fontWeight": "800"
+                },
+                "color": { "text": "#FFFFFF" }
+            },
+            "core/post-date": {
+                "typography": { "fontSize": "12.5px" },
+                "color": { "text": "rgba(255,255,255,0.45)" }
+            },
+            "core/post-author": {
+                "typography": { "fontSize": "12.5px" },
+                "color": { "text": "rgba(255,255,255,0.45)" }
+            },
+            "core/post-excerpt": {
+                "color": { "text": "rgba(255,255,255,0.75)" }
+            },
+            "core/post-terms": {
+                "typography": {
+                    "fontFamily": "'DM Mono', monospace",
+                    "fontSize": "10px",
+                    "letterSpacing": "0.1em",
+                    "textTransform": "uppercase"
+                },
+                "color": { "text": "#00C8FF" }
+            },
+            "core/post-featured-image": {
+                "border": { "radius": "8px" }
+            },
+            "core/query": {
+                "color": { "text": "#FFFFFF" }
+            },
+            "core/template-part": {
+                "color": { "text": "#FFFFFF" }
             }
         }
     },
     "templateParts": [
-        {
-            "name": "header",
-            "title": "Header",
-            "area": "header"
-        },
-        {
-            "name": "footer",
-            "title": "Footer",
-            "area": "footer"
-        }
+        { "name": "header", "title": "Header", "area": "header" },
+        { "name": "footer", "title": "Footer", "area": "footer" }
     ],
     "customTemplates": [
         {
@@ -190,8 +423,7 @@
         },
         {
             "name": "archive-product",
-            "title": "Shop / Product Archive",
-            "postTypes": ["page"]
+            "title": "Shop / Product Archive"
         },
         {
             "name": "404",

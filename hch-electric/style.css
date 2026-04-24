@@ -1547,19 +1547,17 @@ footer.wp-block-template-part.hch-footer{
    Replaces decorative display fonts on checkout/cart/account pages and
    on all price/number elements for maximum readability.
    ═══════════════════════════════════════════════════════════════════════════ */
-:root{--f-sys:var(--f-body);} /* all WC utility pages now use Outfit */
-
 body.woocommerce-cart,
 body.woocommerce-checkout,
 body.woocommerce-account,
 body.woocommerce-order-received{
-	font-family:var(--f-sys) !important;
+	font-family:var(--f-body) !important;
 }
 body.woocommerce-cart *,
 body.woocommerce-checkout *,
 body.woocommerce-account *,
 body.woocommerce-order-received *{
-	font-family:var(--f-sys) !important;
+	font-family:var(--f-body) !important;
 }
 /* Restore mono font for labels/SKUs on WC pages */
 body.woocommerce-cart .hch-product__sku,

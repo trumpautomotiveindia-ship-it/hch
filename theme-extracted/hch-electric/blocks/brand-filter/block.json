@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "hch/brand-filter",
+	"version": "1.0.0",
+	"title": "HCH Brand Filter",
+	"category": "hch-electric",
+	"icon": "filter",
+	"description": "Horizontal rail of WooCommerce brand attribute chips. Powered by the pa_brand taxonomy.",
+	"keywords": [
+		"brand",
+		"filter",
+		"woocommerce",
+		"hch"
+	],
+	"textdomain": "hch-electric",
+	"supports": {
+		"html": false,
+		"reusable": true,
+		"align": [
+			"wide",
+			"full"
+		],
+		"spacing": {
+			"margin": true
+		}
+	},
+	"attributes": {},
+	"example": {}
+}

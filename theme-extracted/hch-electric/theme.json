@@ -1,0 +1,83 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+    "version": 2,
+    "settings": {
+        "appearanceTools": true,
+        "color": {
+            "palette": [
+                { "slug": "dark",       "color": "#090C0E", "name": "Dark" },
+                { "slug": "dark-2",     "color": "#101418", "name": "Dark 2" },
+                { "slug": "dark-3",     "color": "#161B20", "name": "Dark 3" },
+                { "slug": "cyan",       "color": "#00C8FF", "name": "Cyan" },
+                { "slug": "green",      "color": "#00E87A", "name": "Green" },
+                { "slug": "card",       "color": "#F2F5F7", "name": "Card" },
+                { "slug": "ink",        "color": "#0B0E11", "name": "Ink" },
+                { "slug": "ink-light",  "color": "#9EA4AD", "name": "Ink Light" },
+                { "slug": "white",      "color": "#FFFFFF", "name": "White" }
+            ],
+            "custom": true,
+            "customGradient": true,
+            "defaultPalette": false
+        },
+        "typography": {
+            "fontFamilies": [
+                {
+                    "slug": "inter",
+                    "name": "Inter",
+                    "fontFamily": "'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+                },
+                {
+                    "slug": "system-mono",
+                    "name": "System Mono",
+                    "fontFamily": "'SFMono-Regular', 'Consolas', 'Liberation Mono', Menlo, monospace"
+                }
+            ],
+            "fontSizes": [
+                { "slug": "xs",    "size": "10px",  "name": "XS" },
+                { "slug": "small", "size": "12.5px","name": "Small" },
+                { "slug": "base",  "size": "15px",  "name": "Base" },
+                { "slug": "large", "size": "22px",  "name": "Large" },
+                { "slug": "xl",    "size": "32px",  "name": "XL" },
+                { "slug": "xxl",   "size": "52px",  "name": "XXL" }
+            ]
+        },
+        "spacing": {
+            "padding": true,
+            "margin": true,
+            "units": ["px", "rem", "em", "%"]
+        },
+        "layout": {
+            "contentSize": "820px",
+            "wideSize": "1280px"
+        }
+    },
+    "styles": {
+        "color": {
+            "background": "#090C0E",
+            "text": "#FFFFFF"
+        },
+        "typography": {
+            "fontFamily": "'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
+            "fontSize": "16px",
+            "lineHeight": "1.55"
+        },
+        "elements": {
+            "link": {
+                "color": { "text": "#00C8FF" }
+            },
+            "h1": {
+                "typography": { "fontFamily": "'Inter', system-ui, sans-serif", "fontWeight": "800", "letterSpacing": "-0.025em" }
+            },
+            "h2": {
+                "typography": { "fontFamily": "'Inter', system-ui, sans-serif", "fontWeight": "800" }
+            },
+            "h3": {
+                "typography": { "fontFamily": "'Inter', system-ui, sans-serif", "fontWeight": "700" }
+            },
+            "button": {
+                "color": { "background": "#00C8FF", "text": "#090C0E" },
+                "typography": { "fontFamily": "'Inter', system-ui, sans-serif", "fontWeight": "700" }
+            }
+        }
+    }
+}

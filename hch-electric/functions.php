@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'HCH_VERSION', '1.7.0' );
+define( 'HCH_VERSION', '1.8.0' );
 define( 'HCH_DIR', get_template_directory() );
 define( 'HCH_URL', get_template_directory_uri() );
 
@@ -90,9 +90,9 @@ function hch_enqueue() {
 		null
 	);
 
-	wp_enqueue_style( 'hch-style', get_stylesheet_uri(), array( 'hch-fonts' ), HCH_VERSION );
+	wp_enqueue_style( 'hch-style', get_stylesheet_uri(), array( 'hch-fonts' ), filemtime( get_stylesheet_directory() . '/style.css' ) );
 
-	wp_enqueue_script( 'hch-main', HCH_URL . '/js/hch.js', array( 'jquery' ), HCH_VERSION, true );
+	wp_enqueue_script( 'hch-main', HCH_URL . '/js/hch.js', array( 'jquery' ), filemtime( HCH_DIR . '/js/hch.js' ), true );
 
 	$whatsapp = trim( (string) get_theme_mod( 'hch_whatsapp', '919999999999' ) );
 	$whatsapp = preg_replace( '/\D+/', '', $whatsapp );
@@ -266,6 +266,28 @@ function hch_output_cart_drawer() {
 add_action( 'wp_footer', 'hch_output_cart_drawer', 5 );
 
 /**
+ * Output the search overlay via wp_footer so it works in both classic and block themes.
+ * The search icon button (in header.php or hch/search-form block) toggles this overlay.
+ */
+function hch_output_search_overlay() {
+	?>
+	<div class="hch-search-overlay" id="hchSearchOverlay" role="search">
+		<form method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+			<input type="search" class="hch-search-overlay__input"
+				placeholder="<?php esc_attr_e( 'Search parts, specs, SKUs…', 'hch-electric' ); ?>"
+				name="s" value="<?php echo esc_attr( get_search_query() ); ?>" autocomplete="off"/>
+			<?php if ( class_exists( 'WooCommerce' ) ) : ?>
+				<input type="hidden" name="post_type" value="product"/>
+			<?php endif; ?>
+			<button type="button" class="hch-search-overlay__close" id="hchSearchClose"
+				aria-label="<?php esc_attr_e( 'Close search', 'hch-electric' ); ?>">✕</button>
+		</form>
+	</div>
+	<?php
+}
+add_action( 'wp_footer', 'hch_output_search_overlay', 6 );
+
+/**
  * Tell WordPress this is a block theme by declaring template parts for the
  * Site Editor.
  */
@@ -293,16 +315,12 @@ add_filter( 'woocommerce_add_to_cart_fragments', function( $fragments ) {
  */
 function hch_search_form_shortcode() {
 	ob_start(); ?>
-	<form role="search" method="get" class="hch-search" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-		<span class="hch-search__ico">⌕</span>
-		<input class="hch-search__input" type="search" name="s"
-			value="<?php echo esc_attr( get_search_query() ); ?>"
-			placeholder="<?php esc_attr_e( 'Search parts, specs, SKUs…', 'hch-electric' ); ?>"
-			autocomplete="off"/>
-		<?php if ( class_exists( 'WooCommerce' ) ) : ?>
-			<input type="hidden" name="post_type" value="product"/>
-		<?php endif; ?>
-	</form>
+	<button type="button" class="hch-search-icon" id="hchSearchToggle"
+		aria-label="<?php esc_attr_e( 'Search', 'hch-electric' ); ?>">
+		<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+			<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+		</svg>
+	</button>
 	<?php
 	return ob_get_clean();
 }

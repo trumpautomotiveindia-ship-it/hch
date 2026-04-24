@@ -4,7 +4,7 @@ Theme URI: https://hchelectric.com/
 Author: HCH Electric
 Author URI: https://hchelectric.com/
 Description: A premium WooCommerce-ready theme for EV spare parts retailers. Dark, dense, B2B-first layout with sticky category rail, brand attribute filter, off-canvas cart drawer and WhatsApp checkout. Fully editable via the Block Editor (Gutenberg) and the Customizer.
-Version: 1.7.0
+Version: 1.8.0
 Requires at least: 6.2
 Tested up to: 6.5
 Requires PHP: 7.4
@@ -1336,3 +1336,264 @@ footer.wp-block-template-part.hch-footer{
 
 /* ── SEO: hide duplicate WP title tag (title-tag support handles it) ─────── */
 /* nothing needed — WordPress outputs <title> via wp_head when title-tag support is declared */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FIX 1 — Hero desktop sizing
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media(min-width:1024px){
+	.hch-hero{padding:72px 16px 56px;}
+	.hch-hero__kicker,
+	.hch-hero__kicker.wp-block-paragraph{font-size:12px;}
+	.hch-hero__h1,
+	.hch-hero__h1.wp-block-heading{font-size:clamp(52px,6vw,88px) !important;line-height:1.02;}
+	.hch-hero__sub,
+	.hch-hero__sub.wp-block-paragraph{font-size:18px;}
+	.hch-hero__stat-num,
+	.hch-hero__stat .hch-hero__stat-num{font-size:32px;}
+	.hch-hero__stat-label,
+	.hch-hero__stat .hch-hero__stat-label{font-size:12px;letter-spacing:.1em;}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FIX 2 — Category icon sizes (desktop)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media(min-width:768px){
+	.hch-cat__ico{font-size:20px;}
+	.hch-catgrid__ico{font-size:52px;}
+	.hch-catsect__ico{font-size:26px;}
+	/* Ensure catgrid image container is tall enough for the larger icon */
+	.hch-catgrid__img{min-height:100px;}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FIX 3 — Cart quantity input (replaces static span)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.qty__input{
+	width:42px;
+	text-align:center;
+	background:transparent;
+	border:1px solid var(--border-dark);
+	color:#fff;
+	font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+	font-size:12px;
+	font-weight:600;
+	border-radius:var(--r-sm);
+	padding:3px 4px;
+	outline:none;
+	-webkit-appearance:none;
+	-moz-appearance:textfield;
+	transition:border-color .15s;
+}
+.qty__input::-webkit-inner-spin-button,
+.qty__input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
+.qty__input:focus{border-color:var(--cyan);}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FIX 4 — Search icon button + full-width overlay
+   ═══════════════════════════════════════════════════════════════════════════ */
+.hch-logo__link{flex-shrink:0;display:flex;align-items:center;text-decoration:none;}
+
+.hch-search-icon{
+	width:38px;height:38px;
+	background:rgba(255,255,255,.06);
+	border:1px solid var(--border-dark);
+	border-radius:var(--r-sm);
+	color:#fff;
+	cursor:pointer;
+	display:flex;align-items:center;justify-content:center;
+	flex-shrink:0;
+	transition:background .15s,color .15s,border-color .15s;
+}
+.hch-search-icon:hover{background:rgba(0,200,255,.14);color:var(--cyan);border-color:rgba(0,200,255,.3);}
+.hch-search-icon svg{display:block;pointer-events:none;}
+
+.hch-search-overlay{
+	position:fixed;
+	top:54px;
+	left:0;right:0;
+	z-index:298;
+	background:rgba(9,12,14,.98);
+	padding:14px 16px;
+	border-bottom:2px solid var(--cyan);
+	opacity:0;
+	pointer-events:none;
+	transform:translateY(-10px);
+	transition:opacity .2s,transform .2s;
+}
+@media(min-width:601px){
+	.hch-search-overlay{top:88px;}
+}
+.admin-bar .hch-search-overlay{top:calc(54px + 32px);}
+@media(min-width:601px){.admin-bar .hch-search-overlay{top:calc(88px + 32px);}}
+@media(max-width:782px){.admin-bar .hch-search-overlay{top:calc(54px + 46px);}}
+
+.hch-search-overlay.open{
+	opacity:1;
+	pointer-events:auto;
+	transform:translateY(0);
+}
+.hch-search-overlay form{
+	max-width:640px;
+	margin:0 auto;
+	display:flex;
+	gap:8px;
+	align-items:center;
+}
+.hch-search-overlay__input{
+	flex:1;
+	background:rgba(255,255,255,.06);
+	border:1px solid var(--border-dark);
+	border-radius:var(--r-sm);
+	color:#fff;
+	font-family:var(--f-body);
+	font-size:16px;
+	padding:12px 16px;
+	outline:none;
+	transition:border-color .15s,background .15s;
+}
+.hch-search-overlay__input::placeholder{color:rgba(255,255,255,.35);}
+.hch-search-overlay__input:focus{border-color:var(--cyan);background:rgba(0,200,255,.05);}
+.hch-search-overlay__close{
+	flex-shrink:0;
+	width:38px;height:38px;
+	background:rgba(255,255,255,.06);
+	border:1px solid var(--border-dark);
+	border-radius:var(--r-sm);
+	color:#fff;
+	cursor:pointer;
+	display:flex;align-items:center;justify-content:center;
+	font-size:16px;
+	transition:background .15s,color .15s;
+}
+.hch-search-overlay__close:hover{background:rgba(255,60,60,.18);color:#ff6060;border-color:rgba(255,60,60,.3);}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FIX 7 — Pure white text throughout
+   Overrides all low-opacity rgba white used for text hierarchy.
+   Does NOT touch borders, backgrounds, or shadows.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.hch-search__ico,
+.hch-brands__label,
+.hch-brand-chip,
+.hch-cat,
+.hch-cat:hover,
+.hch-shop__title,
+.hch-shop__count,
+.hch-empty,
+.hch-drawer__close,
+.hch-ci__name,
+.hch-ci__spec,
+.qty__btn,
+.hch-drawer__tot-lbl,
+.hch-drawer__gst,
+.hch-footer__brand p,
+.hch-footer__brand .wp-block-paragraph,
+.hch-footer__col h4,
+.hch-footer__col .wp-block-heading,
+.hch-footer__col a,
+.hch-footer__col .wp-block-navigation,
+.hch-footer__col .wp-block-navigation a,
+.hch-footer__copy,
+.hch-footer__disc,
+.hch-cta__sub,
+.hch-testi__q,
+.hch-testi__c span,
+.hch-trust__lbl,
+.hch-trust__i,
+.hch-contact__lbl,
+.hch-feature__d,
+.hch-faq__i p,
+.hch-no-results,
+.hch-catsect__all,
+.hch-catsect__all span,
+.hch-single .woocommerce-product-details__short-description,
+.hch-single .product_meta,
+.hch-post-meta,
+.wp-block-query-pagination a,
+.wp-block-query-pagination .page-numbers,
+.hch-breadcrumbs,
+.hch-breadcrumbs a,
+.woocommerce-cart .cart-empty,
+.woocommerce-cart table.shop_table th,
+.cart_totals .woocommerce-shipping-destination,
+.woocommerce-checkout .form-row label,
+.woocommerce-checkout #payment .payment_box,
+.woocommerce-checkout .woocommerce-terms-and-conditions-wrapper,
+.woocommerce-order ul.order_details li,
+.select2-results__option,
+.hch-content{
+	color:#fff !important;
+}
+
+/* Hero sub and footer description — near-white, slightly softer */
+.hch-hero__sub,
+.hch-hero__sub.wp-block-paragraph{
+	color:rgba(255,255,255,.88) !important;
+}
+
+/* Stat labels — white */
+.hch-hero__stat-label,
+.hch-hero__stat .hch-hero__stat-label{
+	color:#fff !important;
+}
+
+/* Remove-item button: subtle so it doesn't dominate, but visible */
+.hch-ci__rm{color:rgba(255,255,255,.55) !important;}
+.hch-ci__rm:hover{color:#ff6060 !important;}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FIX 8 — System font for numbers + WooCommerce utility pages
+   Replaces decorative display fonts on checkout/cart/account pages and
+   on all price/number elements for maximum readability.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root{--f-sys:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;}
+
+body.woocommerce-cart,
+body.woocommerce-checkout,
+body.woocommerce-account,
+body.woocommerce-order-received{
+	font-family:var(--f-sys) !important;
+}
+body.woocommerce-cart *,
+body.woocommerce-checkout *,
+body.woocommerce-account *,
+body.woocommerce-order-received *{
+	font-family:var(--f-sys) !important;
+}
+/* Restore mono font for labels/SKUs on WC pages */
+body.woocommerce-cart .hch-product__sku,
+body.woocommerce-checkout .hch-product__sku,
+.woocommerce-cart table.shop_table th,
+.woocommerce-checkout .form-row label,
+.woocommerce-order ul.order_details li{
+	font-family:var(--f-mono) !important;
+}
+/* Restore heading font for titles on WC pages */
+body.woocommerce-cart h1,body.woocommerce-cart h2,body.woocommerce-cart h3,
+body.woocommerce-checkout h1,body.woocommerce-checkout h2,body.woocommerce-checkout h3,
+body.woocommerce-account h1,body.woocommerce-account h2{
+	font-family:var(--f-head) !important;
+}
+
+/* System font on ALL price / number elements sitewide */
+.hch-product__price,
+.hch-product__price .woocommerce-Price-amount,
+.hch-ci__price,
+.qty__val,
+.qty__input,
+.hch-drawer__tot-val,
+.hch-hero__stat-num,
+.hch-hero__stat .hch-hero__stat-num,
+.woocommerce .price,
+.woocommerce .amount,
+.woocommerce-Price-amount,
+.woocommerce-Price-amount bdi,
+.order-total .amount,
+.cart-subtotal .amount,
+.cart_totals table .order-total td,
+.cart_totals table .order-total th,
+.hch-single .price{
+	font-family:var(--f-sys) !important;
+}
+.hch-hero__stat-num,
+.hch-hero__stat .hch-hero__stat-num{font-weight:800 !important;}

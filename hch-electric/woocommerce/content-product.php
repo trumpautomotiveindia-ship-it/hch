@@ -47,7 +47,7 @@ $brands[] = 'all';
 	<a class="hch-product__link" href="<?php the_permalink(); ?>">
 		<div class="hch-product__img">
 			<?php if ( has_post_thumbnail() ) {
-				the_post_thumbnail( 'woocommerce_thumbnail' );
+				the_post_thumbnail( 'woocommerce_thumbnail', array( 'loading' => 'lazy', 'alt' => esc_attr( $product->get_name() ) ) );
 			} elseif ( $icon ) {
 				echo '<span>' . esc_html( $icon ) . '</span>';
 			} else {

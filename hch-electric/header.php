@@ -20,26 +20,16 @@
 
 <header class="hch-header" role="banner">
 	<div class="hch-header__inner">
-		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="hch-logo" aria-label="<?php bloginfo( 'name' ); ?>">
-			<?php if ( has_custom_logo() ) {
-				$logo_id = get_theme_mod( 'custom_logo' );
-				$logo    = wp_get_attachment_image_src( $logo_id, 'full' );
-				if ( $logo ) : ?>
-					<img src="<?php echo esc_url( $logo[0] ); ?>" alt="<?php bloginfo( 'name' ); ?>"/>
-				<?php endif;
-			} else { ?>
-				<span class="hch-logo__text"><?php bloginfo( 'name' ); ?></span>
-			<?php } ?>
+
+		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="hch-logo__link" aria-label="<?php bloginfo( 'name' ); ?>">
+			<span class="hch-logo__text">hchelectric.in</span>
 		</a>
 
-		<form role="search" method="get" class="hch-search" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-			<span class="hch-search__ico">⌕</span>
-			<input class="hch-search__input" type="search" name="s" value="<?php echo esc_attr( get_search_query() ); ?>"
-				placeholder="<?php esc_attr_e( 'Search parts, specs, SKUs…', 'hch-electric' ); ?>" autocomplete="off"/>
-			<?php if ( class_exists( 'WooCommerce' ) ) : ?>
-				<input type="hidden" name="post_type" value="product"/>
-			<?php endif; ?>
-		</form>
+		<button type="button" class="hch-search-icon" id="hchSearchToggle" aria-label="<?php esc_attr_e( 'Search', 'hch-electric' ); ?>">
+			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+				<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+			</svg>
+		</button>
 
 		<?php
 		$cart_count = 0;
@@ -54,5 +44,6 @@
 			</svg>
 			<span class="hch-cart-btn__count" id="hchCartCount"><?php echo (int) $cart_count; ?></span>
 		</button>
+
 	</div>
 </header>

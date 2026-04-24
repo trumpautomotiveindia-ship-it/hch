@@ -16,7 +16,19 @@
 
 	function openCart()  { $overlay.addClass('open'); $drawer.addClass('open'); document.body.style.overflow = 'hidden'; refreshCart(); }
 	function closeCart() { $overlay.removeClass('open'); $drawer.removeClass('open'); document.body.style.overflow = ''; }
-	function closeSearch() { $('#hchSearchOverlay').removeClass('open'); }
+	/* Position search overlay exactly at the header's bottom edge */
+	function positionSearchOverlay() {
+		var header = document.querySelector('.hch-header');
+		var overlay = document.getElementById('hchSearchOverlay');
+		if (header && overlay) {
+			overlay.style.top = header.getBoundingClientRect().bottom + 'px';
+		}
+	}
+
+	function closeSearch() {
+		$('#hchSearchOverlay').removeClass('open');
+		document.body.style.overflow = '';
+	}
 
 	$(document).on('click', '#hchCartBtn',   function (e) { e.preventDefault(); openCart(); });
 	$(document).on('click', '#hchCartClose', closeCart);
@@ -29,12 +41,23 @@
 	$(document).on('click', '#hchSearchToggle', function () {
 		const $so = $('#hchSearchOverlay');
 		const opening = !$so.hasClass('open');
+		positionSearchOverlay();
 		$so.toggleClass('open');
 		if (opening) {
+			document.body.style.overflow = 'hidden';
 			setTimeout(function () { $so.find('.hch-search-overlay__input').trigger('focus'); }, 50);
+		} else {
+			document.body.style.overflow = '';
 		}
 	});
 	$(document).on('click', '#hchSearchClose', closeSearch);
+
+	/* Reposition when viewport changes (mobile URL bar appearing/disappearing) */
+	$(window).on('scroll.hchSearch resize.hchSearch', function () {
+		if ($('#hchSearchOverlay').hasClass('open')) {
+			positionSearchOverlay();
+		}
+	});
 
 	$waBtn.on('click', function (e) {
 		e.preventDefault();

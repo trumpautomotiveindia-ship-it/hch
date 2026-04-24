@@ -13,9 +13,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /* ──────────────────────────────────────────────────────────────────────────
  * 1. Preconnect hints for Google Fonts (speeds up LCP, good for Core Web Vitals)
  * ─────────────────────────────────────────────────────────────────────────── */
+/* Force public indexing — production e-commerce store should always be crawlable */
+add_filter( 'pre_option_blog_public', '__return_true' );
+
 function hch_seo_preconnect() {
 	echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
 	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+	/* Sitemap discovery link for crawlers */
+	echo '<link rel="sitemap" type="application/xml" title="Sitemap" href="' . esc_url( home_url( '/wp-sitemap.xml' ) ) . '">' . "\n";
 }
 add_action( 'wp_head', 'hch_seo_preconnect', 1 );
 
@@ -502,10 +507,20 @@ function hch_seo_breadcrumbs_data() {
  * 7. Improve the auto-generated robots.txt
  * ─────────────────────────────────────────────────────────────────────────── */
 function hch_seo_robots_txt( $output ) {
+	/* Remove "Disallow: /" that WordPress adds when "Discourage search engines" is on */
+	$output = preg_replace( '/^Disallow:\s+\/\s*$/m', '', $output );
+
+	/* Ensure explicit Allow: / so crawlers know the site is public */
+	if ( false === strpos( $output, 'Allow: /' ) ) {
+		$output = "User-agent: *\nAllow: /\n\n" . ltrim( $output );
+	}
+
+	/* Add sitemap URL */
 	$sitemap = home_url( '/wp-sitemap.xml' );
 	if ( false === strpos( $output, 'Sitemap:' ) ) {
 		$output .= "\nSitemap: " . esc_url( $sitemap ) . "\n";
 	}
+
 	/* Block WooCommerce utility URLs from crawlers */
 	$disallow = array(
 		'/wp-admin/',
@@ -515,6 +530,7 @@ function hch_seo_robots_txt( $output ) {
 		'/?add-to-cart=',
 		'/wp-json/',
 		'/wp-login.php',
+		'/wp-cron.php',
 	);
 	foreach ( $disallow as $path ) {
 		if ( false === strpos( $output, 'Disallow: ' . $path ) ) {
@@ -530,6 +546,14 @@ add_filter( 'robots_txt', 'hch_seo_robots_txt', 10 );
  * ─────────────────────────────────────────────────────────────────────────── */
 add_filter( 'wp_sitemaps_enabled', '__return_true' );
 
+/* Ensure WooCommerce products are in the sitemap */
+add_filter( 'wp_sitemaps_post_types', function ( $post_types ) {
+	if ( post_type_exists( 'product' ) && ! isset( $post_types['product'] ) ) {
+		$post_types['product'] = get_post_type_object( 'product' );
+	}
+	return $post_types;
+} );
+
 /* Add WooCommerce product categories to the sitemap */
 function hch_seo_sitemap_taxonomies( $taxonomies ) {
 	if ( taxonomy_exists( 'product_cat' ) ) {
@@ -538,6 +562,14 @@ function hch_seo_sitemap_taxonomies( $taxonomies ) {
 	return $taxonomies;
 }
 add_filter( 'wp_sitemaps_taxonomies', 'hch_seo_sitemap_taxonomies' );
+
+/* Exclude private/draft products from sitemap */
+add_filter( 'wp_sitemaps_posts_query_args', function ( $args, $post_type ) {
+	if ( 'product' === $post_type ) {
+		$args['post_status'] = 'publish';
+	}
+	return $args;
+}, 10, 2 );
 
 /* ──────────────────────────────────────────────────────────────────────────
  * 9. SEO-friendly <title> suffix via wp_title filter (pre-5.9 fallback)

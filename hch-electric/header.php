@@ -25,12 +25,6 @@
 			<span class="hch-logo__text">hchelectric.in</span>
 		</a>
 
-		<button type="button" class="hch-search-icon" id="hchSearchToggle" aria-label="<?php esc_attr_e( 'Search', 'hch-electric' ); ?>">
-			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
-				<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-			</svg>
-		</button>
-
 		<?php
 		$cart_count = 0;
 		if ( function_exists( 'WC' ) && WC()->cart ) {
@@ -43,6 +37,12 @@
 				<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
 			</svg>
 			<span class="hch-cart-btn__count" id="hchCartCount"><?php echo (int) $cart_count; ?></span>
+		</button>
+
+		<button type="button" class="hch-search-icon" id="hchSearchToggle" aria-label="<?php esc_attr_e( 'Search', 'hch-electric' ); ?>">
+			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+				<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+			</svg>
 		</button>
 
 	</div>

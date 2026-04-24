@@ -67,7 +67,7 @@ function hch_render_product_meta_box( $post ) {
 }
 
 function hch_save_product_meta( $post_id ) {
-	if ( ! isset( $_POST['hch_product_nonce'] ) || ! wp_verify_nonce( $_POST['hch_product_nonce'], 'hch_save_product_meta' ) ) {
+	if ( ! isset( $_POST['hch_product_nonce'] ) || ! wp_verify_nonce( wp_unslash( $_POST['hch_product_nonce'] ), 'hch_save_product_meta' ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		return;
 	}
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;

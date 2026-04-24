@@ -5,7 +5,7 @@
  * so they work in both classic-PHP and block-theme contexts.
  * @package HCH_Electric
  */
-$copy  = get_theme_mod( 'hch_footer_copy', sprintf( '© %s HCH Electric. All rights reserved.', date( 'Y' ) ) );
+$copy  = get_theme_mod( 'hch_footer_copy', sprintf( '© %s HCH Electric. All rights reserved.', gmdate( 'Y' ) ) );
 $disc  = get_theme_mod( 'hch_footer_disc', __( 'Not affiliated with Ola, Ather, Bajaj, TVS or Hero. Aftermarket parts only.', 'hch-electric' ) );
 $about = get_theme_mod( 'hch_footer_about', __( 'Aftermarket EV spare parts for Indian electric scooters, e-rickshaws & e-cycles.', 'hch-electric' ) );
 ?>
@@ -55,9 +55,9 @@ $about = get_theme_mod( 'hch_footer_about', __( 'Aftermarket EV spare parts for 
 					?>
 					<ul>
 						<li><a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></li>
-						<li><a href="#"><?php esc_html_e( 'GST Reg. Business', 'hch-electric' ); ?></a></li>
-						<li><a href="#"><?php esc_html_e( '18% GST on parts', 'hch-electric' ); ?></a></li>
-						<li><a href="#"><?php esc_html_e( '5% GST on chargers', 'hch-electric' ); ?></a></li>
+						<li><span><?php esc_html_e( 'GST Reg. Business', 'hch-electric' ); ?></span></li>
+						<li><span><?php esc_html_e( '18% GST on parts', 'hch-electric' ); ?></span></li>
+						<li><span><?php esc_html_e( '5% GST on chargers', 'hch-electric' ); ?></span></li>
 						<li><a href="<?php echo esc_url( get_privacy_policy_url() ?: '#' ); ?>"><?php esc_html_e( 'Privacy Policy', 'hch-electric' ); ?></a></li>
 					</ul>
 				<?php } ?>

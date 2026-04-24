@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'HCH_VERSION', '2.0.0' );
+define( 'HCH_VERSION', '2.0.1' );
 define( 'HCH_DIR', get_template_directory() );
 define( 'HCH_URL', get_template_directory_uri() );
 
@@ -117,6 +117,16 @@ function hch_enqueue() {
 	) );
 }
 add_action( 'wp_enqueue_scripts', 'hch_enqueue' );
+
+/**
+ * WooCommerce HPOS + Cart/Checkout Blocks compatibility.
+ */
+add_action( 'before_woocommerce_init', function() {
+	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', __FILE__, true );
+	}
+} );
 
 require_once HCH_DIR . '/inc/seo.php';
 require_once HCH_DIR . '/inc/customizer.php';

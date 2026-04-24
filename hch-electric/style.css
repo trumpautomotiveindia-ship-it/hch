@@ -4,7 +4,7 @@ Theme URI: https://hchelectric.com/
 Author: HCH Electric
 Author URI: https://hchelectric.com/
 Description: A premium WooCommerce-ready theme for EV spare parts retailers. Dark, dense, B2B-first layout with sticky category rail, brand attribute filter, off-canvas cart drawer and WhatsApp checkout. Fully editable via the Block Editor (Gutenberg) and the Customizer.
-Version: 2.0.0
+Version: 2.0.1
 Requires at least: 6.2
 Tested up to: 6.5
 Requires PHP: 7.4
@@ -259,6 +259,20 @@ a{text-decoration:none;color:inherit;}
 ::-webkit-scrollbar{height:3px;width:3px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--border-dark);border-radius:3px;}
+
+/* SKIP LINK (accessibility) */
+.hch-skip-link{
+	position:absolute;
+	top:-100%;left:0;
+	background:var(--cyan);color:var(--dark);
+	font-family:var(--f-head);font-weight:700;font-size:13px;
+	padding:10px 18px;
+	z-index:9999;
+	text-decoration:none;
+	border-radius:0 0 var(--r-sm) 0;
+	transition:top .1s;
+}
+.hch-skip-link:focus{top:0;}
 
 /* TICKER */
 .hch-ticker{background:var(--cyan);color:var(--dark);padding:7px 0;overflow:hidden;white-space:nowrap;font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;font-weight:500;}

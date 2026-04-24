@@ -156,11 +156,3 @@ function hch_build_cart_payload() {
 	);
 }
 
-/**
- * Refresh header cart count via WooCommerce fragments (for non-AJAX flows).
- */
-add_filter( 'woocommerce_add_to_cart_fragments', function( $fragments ) {
-	$count = WC()->cart ? WC()->cart->get_cart_contents_count() : 0;
-	$fragments['#hchCartCount'] = '<span class="hch-cart-btn__count" id="hchCartCount">' . (int) $count . '</span>';
-	return $fragments;
-} );

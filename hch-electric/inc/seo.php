@@ -310,7 +310,7 @@ function hch_seo_jsonld() {
 				'price'         => $wc->get_price() ?: '0',
 				'availability'  => $avail,
 				'seller'        => array( '@id' => $site_url . '#organization' ),
-				'priceValidUntil' => date( 'Y-12-31', strtotime( '+1 year' ) ),
+				'priceValidUntil' => gmdate( 'Y-12-31', strtotime( '+1 year' ) ),
 				'hasMerchantReturnPolicy' => array(
 					'@type'            => 'MerchantReturnPolicy',
 					'returnPolicyCategory' => 'https://schema.org/MerchantReturnNotPermitted',

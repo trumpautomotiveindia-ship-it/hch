@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'HCH_VERSION', '2.0.1' );
+define( 'HCH_VERSION', '2.1.0' );
 define( 'HCH_DIR', get_template_directory() );
 define( 'HCH_URL', get_template_directory_uri() );
 
@@ -353,7 +353,7 @@ function hch_cart_button_shortcode() {
 			<circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
 			<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
 		</svg>
-		<span class="hch-cart-btn__count" id="hchCartCount"><?php echo $count; ?></span>
+		<span class="hch-cart-btn__count" id="hchCartCount"><?php echo (int) $count; ?></span>
 	</button>
 	<?php
 	return ob_get_clean();

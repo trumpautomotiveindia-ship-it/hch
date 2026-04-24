@@ -94,7 +94,7 @@ function hch_customize_register( $wp_customize ) {
 	) );
 	$wp_customize->add_setting( 'hch_footer_about', array( 'default' => 'Aftermarket EV spare parts for Indian electric scooters, e-rickshaws & e-cycles.', 'sanitize_callback' => 'sanitize_textarea_field' ) );
 	$wp_customize->add_control( 'hch_footer_about', array( 'label' => __( 'Brand description', 'hch-electric' ), 'section' => 'hch_footer', 'type' => 'textarea' ) );
-	$wp_customize->add_setting( 'hch_footer_copy', array( 'default' => sprintf( '© %s HCH Electric. All rights reserved.', date( 'Y' ) ), 'sanitize_callback' => 'sanitize_text_field' ) );
+	$wp_customize->add_setting( 'hch_footer_copy', array( 'default' => sprintf( '© %s HCH Electric. All rights reserved.', gmdate( 'Y' ) ), 'sanitize_callback' => 'sanitize_text_field' ) );
 	$wp_customize->add_control( 'hch_footer_copy', array( 'label' => __( 'Copyright line', 'hch-electric' ), 'section' => 'hch_footer', 'type' => 'text' ) );
 	$wp_customize->add_setting( 'hch_footer_disc', array( 'default' => 'Not affiliated with Ola, Ather, Bajaj, TVS or Hero. Aftermarket parts only.', 'sanitize_callback' => 'sanitize_textarea_field' ) );
 	$wp_customize->add_control( 'hch_footer_disc', array( 'label' => __( 'Disclaimer', 'hch-electric' ), 'section' => 'hch_footer', 'type' => 'textarea' ) );

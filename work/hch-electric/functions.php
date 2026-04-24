@@ -276,27 +276,7 @@ function hch_output_cart_drawer() {
 }
 add_action( 'wp_footer', 'hch_output_cart_drawer', 5 );
 
-/**
- * Output the search overlay via wp_footer so it works in both classic and block themes.
- * The search icon button (in header.php or hch/search-form block) toggles this overlay.
- */
-function hch_output_search_overlay() {
-	?>
-	<div class="hch-search-overlay" id="hchSearchOverlay" role="search">
-		<form method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-			<input type="search" class="hch-search-overlay__input"
-				placeholder="<?php esc_attr_e( 'Search parts, specs, SKUs…', 'hch-electric' ); ?>"
-				name="s" value="<?php echo esc_attr( get_search_query() ); ?>" autocomplete="off"/>
-			<?php if ( class_exists( 'WooCommerce' ) ) : ?>
-				<input type="hidden" name="post_type" value="product"/>
-			<?php endif; ?>
-			<button type="button" class="hch-search-overlay__close" id="hchSearchClose"
-				aria-label="<?php esc_attr_e( 'Close search', 'hch-electric' ); ?>">✕</button>
-		</form>
-	</div>
-	<?php
-}
-add_action( 'wp_footer', 'hch_output_search_overlay', 6 );
+/* Search is now an inline form in the header — no overlay needed. */
 
 /**
  * Tell WordPress this is a block theme by declaring template parts for the
@@ -321,17 +301,19 @@ add_filter( 'woocommerce_add_to_cart_fragments', function( $fragments ) {
 
 /**
  * Shortcode: [hch_search_form]
- * WooCommerce-aware search form — filters by post_type=product when WooCommerce
- * is active. Used in parts/header.html so it works in block templates.
+ * Inline WooCommerce-aware search form. Used in parts/header.html.
  */
 function hch_search_form_shortcode() {
 	ob_start(); ?>
-	<button type="button" class="hch-search-icon" id="hchSearchToggle"
-		aria-label="<?php esc_attr_e( 'Search', 'hch-electric' ); ?>">
-		<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
-			<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-		</svg>
-	</button>
+	<form role="search" method="get" class="hch-search" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+		<span class="hch-search__ico">⌕</span>
+		<input class="hch-search__input" type="search" name="s"
+			value="<?php echo esc_attr( get_search_query() ); ?>"
+			placeholder="<?php esc_attr_e( 'Search parts, SKUs…', 'hch-electric' ); ?>" autocomplete="off"/>
+		<?php if ( class_exists( 'WooCommerce' ) ) : ?>
+			<input type="hidden" name="post_type" value="product"/>
+		<?php endif; ?>
+	</form>
 	<?php
 	return ob_get_clean();
 }

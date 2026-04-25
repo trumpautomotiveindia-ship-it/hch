@@ -23,7 +23,7 @@ function hch_customize_register( $wp_customize ) {
 		'panel'    => 'hch_panel',
 	) );
 	$wp_customize->add_setting( 'hch_ticker', array(
-		'default'           => "ALL PARTS 18% GST\nPAN-INDIA DISPATCH\nSAME-DAY BEFORE 2PM\nGST INVOICE PROVIDED\n500+ B2B PARTNERS\n120+ CITIES\nLFP · NMC · PMSM · BLDC\nMADE IN INDIA",
+		'default'           => "PAN INDIA DISPATCH\nALL PARTS AT 18% GST\nCHARGERS AT 5% GST",
 		'sanitize_callback' => 'sanitize_textarea_field',
 	) );
 	$wp_customize->add_control( 'hch_ticker', array(

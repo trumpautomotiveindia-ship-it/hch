@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'HCH_VERSION', '2.2.0' );
+define( 'HCH_VERSION', '2.3.0' );
 define( 'HCH_DIR', get_template_directory() );
 define( 'HCH_URL', get_template_directory_uri() );
 
@@ -173,20 +173,21 @@ function hch_category_bar_shortcode() {
 	if ( is_wp_error( $terms ) || empty( $terms ) ) {
 		return '';
 	}
-	$current      = get_queried_object();
-	$current_slug = ( $current && isset( $current->taxonomy ) && 'product_cat' === $current->taxonomy ) ? $current->slug : 'all';
-	$shop_url     = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/' );
+	$active_slug  = isset( $_GET['hch_cat'] ) ? sanitize_key( wp_unslash( $_GET['hch_cat'] ) ) : '';
+	$current_slug = $active_slug ?: 'all';
+	$home_url     = home_url( '/' );
 	ob_start(); ?>
 	<div class="hch-catbar-wrap">
 		<button type="button" class="hch-rail-arrow hch-rail-arrow--l" aria-label="<?php esc_attr_e( 'Scroll left', 'hch-electric' ); ?>">‹</button>
 		<nav class="hch-catbar" data-scroll-container aria-label="<?php esc_attr_e( 'Product categories', 'hch-electric' ); ?>">
-			<a class="hch-cat<?php echo 'all' === $current_slug ? ' active' : ''; ?>" href="<?php echo esc_url( $shop_url ); ?>">
+			<a class="hch-cat<?php echo 'all' === $current_slug ? ' active' : ''; ?>" href="<?php echo esc_url( $home_url . '#primary' ); ?>">
 				<span class="hch-cat__ico">⚡</span><?php esc_html_e( 'All', 'hch-electric' ); ?>
 			</a>
 			<?php foreach ( $terms as $t ) :
 				$icon = get_term_meta( $t->term_id, 'hch_icon', true );
-				if ( ! $icon ) { $icon = '•'; } ?>
-				<a class="hch-cat<?php echo $current_slug === $t->slug ? ' active' : ''; ?>" href="<?php echo esc_url( get_term_link( $t ) ); ?>">
+				if ( ! $icon ) { $icon = '•'; }
+				$url = esc_url( home_url( '/?hch_cat=' . urlencode( $t->slug ) . '#primary' ) ); ?>
+				<a class="hch-cat<?php echo $current_slug === $t->slug ? ' active' : ''; ?>" href="<?php echo $url; // already escaped ?>">
 					<span class="hch-cat__ico"><?php echo esc_html( $icon ); ?></span>
 					<?php echo esc_html( $t->name ); ?>
 					<span class="hch-cat__cnt"><?php echo (int) $t->count; ?></span>
@@ -204,7 +205,7 @@ add_shortcode( 'hch_category_bar', 'hch_category_bar_shortcode' );
  * Shortcode: [hch_ticker] — edit strings in Customizer.
  */
 function hch_ticker_shortcode() {
-	$raw = get_theme_mod( 'hch_ticker', "ALL PARTS 18% GST\nPAN-INDIA DISPATCH\nSAME-DAY BEFORE 2PM\nGST INVOICE PROVIDED\n500+ B2B PARTNERS\n120+ CITIES\nLFP · NMC · PMSM · BLDC\nMADE IN INDIA" );
+	$raw = get_theme_mod( 'hch_ticker', "PAN INDIA DISPATCH\nALL PARTS AT 18% GST\nCHARGERS AT 5% GST" );
 	$lines = array_filter( array_map( 'trim', preg_split( "/\r\n|\r|\n/", $raw ) ) );
 	if ( empty( $lines ) ) { return ''; }
 	$lines = array_merge( $lines, $lines ); // duplicate for seamless scroll
@@ -396,7 +397,8 @@ function hch_footer_categories_shortcode() {
 		if ( ! is_wp_error( $terms ) && $terms ) {
 			echo '<ul>';
 			foreach ( $terms as $t ) {
-				echo '<li><a href="' . esc_url( get_term_link( $t ) ) . '">' . esc_html( $t->name ) . '</a></li>';
+				$url = home_url( '/?hch_cat=' . urlencode( $t->slug ) . '#primary' );
+				echo '<li><a href="' . esc_url( $url ) . '">' . esc_html( $t->name ) . '</a></li>';
 			}
 			echo '</ul>';
 		}

@@ -144,8 +144,7 @@ function hch_block_render_category_grid( $attrs = array(), $content = '' ) {
 					$thumb_id = (int) get_term_meta( $t->term_id, 'thumbnail_id', true );
 					$img_url  = $thumb_id ? wp_get_attachment_image_url( $thumb_id, 'medium' ) : '';
 					$icon     = get_term_meta( $t->term_id, 'hch_icon', true );
-					$url      = get_term_link( $t );
-					if ( is_wp_error( $url ) ) continue; ?>
+					$url      = home_url( '/?hch_cat=' . urlencode( $t->slug ) . '#primary' ); ?>
 					<a class="hch-catgrid__tile" href="<?php echo esc_url( $url ); ?>">
 						<div class="hch-catgrid__img">
 							<?php if ( $img_url ) : ?>
@@ -201,8 +200,7 @@ function hch_block_render_category_sections( $attrs = array(), $content = '' ) {
 	ob_start(); ?>
 	<section class="hch-catsect-wrap">
 	<?php foreach ( $terms as $t ) :
-		$url = get_term_link( $t );
-		if ( is_wp_error( $url ) ) continue;
+		$url = home_url( '/?hch_cat=' . urlencode( $t->slug ) . '#primary' );
 		$q = new WP_Query( array(
 			'post_type'      => 'product',
 			'posts_per_page' => (int) $per_section,

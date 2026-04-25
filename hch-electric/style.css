@@ -4,7 +4,7 @@ Theme URI: https://hchelectric.com/
 Author: HCH Electric
 Author URI: https://hchelectric.com/
 Description: A premium WooCommerce-ready theme for EV spare parts retailers. Dark, dense, B2B-first layout with sticky category rail, brand attribute filter, off-canvas cart drawer and WhatsApp checkout. Fully editable via the Block Editor (Gutenberg) and the Customizer.
-Version: 2.2.0
+Version: 2.3.0
 Requires at least: 6.2
 Tested up to: 6.5
 Requires PHP: 7.4
@@ -146,7 +146,6 @@ ul.products.hch-grid li.product::after{content:none !important;display:none !imp
 	.hch-footer__disc{text-align:left;}
 
 	.hch-drawer{width:100vw;}
-	.hch-rail-arrow{display:none !important;}
 }
 
 /* 3 — UNIFIED FONT on cart / checkout / account / thank-you pages */
@@ -1433,15 +1432,15 @@ footer.wp-block-template-part.hch-footer{
 
 /* Inline header search — expands inside the header bar, no dropdown */
 .hch-header__search-wrap{
-	flex:1;
-	max-width:0;
+	width:0;
+	flex-shrink:0;
 	overflow:hidden;
 	opacity:0;
 	pointer-events:none;
-	transition:max-width .22s ease,opacity .18s;
+	transition:width .22s ease,opacity .18s;
 }
 .hch-header__search-wrap.open{
-	max-width:380px;
+	width:300px;
 	opacity:1;
 	pointer-events:auto;
 }
@@ -1466,7 +1465,7 @@ footer.wp-block-template-part.hch-footer{
 }
 .hch-header__search-input::placeholder{color:rgba(255,255,255,.35);}
 @media(max-width:600px){
-	.hch-header__search-wrap.open{max-width:180px;}
+	.hch-header__search-wrap.open{width:160px;}
 	.hch-header__search-input{min-width:100px;font-size:13px;}
 }
 

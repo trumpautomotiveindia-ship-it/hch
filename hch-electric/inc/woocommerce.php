@@ -9,6 +9,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/* Redirect product category archives to the homepage with ?hch_cat=slug filter */
+add_action( 'template_redirect', function() {
+	if ( is_product_category() ) {
+		$term = get_queried_object();
+		if ( $term && ! is_wp_error( $term ) ) {
+			wp_safe_redirect( home_url( '/?hch_cat=' . urlencode( $term->slug ) . '#primary' ), 301 );
+			exit;
+		}
+	}
+} );
+
 /* Strip default wrappers; we provide our own .hch-shop wrapper in archive-product.php */
 remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
 remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );

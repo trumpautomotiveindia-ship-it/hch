@@ -28,7 +28,6 @@ if ( 'page' === get_option( 'show_on_front' ) && have_posts() ) {
 
 /* ── DEFAULT CURATED LAYOUT (used when no page content) ─────────── */
 
-$kicker = get_theme_mod( 'hch_hero_kicker', __( 'B2B SPECIALISTS · PAN-INDIA DISPATCH', 'hch-electric' ) );
 $h_line1 = get_theme_mod( 'hch_hero_line1', __( 'Every EV part.', 'hch-electric' ) );
 $h_line2 = get_theme_mod( 'hch_hero_line2', __( 'Every spec.', 'hch-electric' ) );
 $h_line3 = get_theme_mod( 'hch_hero_line3', __( 'One source.', 'hch-electric' ) );
@@ -70,7 +69,6 @@ if ( ! function_exists( 'hch_highlight' ) ) {
 	</div>
 </section>
 
-<?php echo do_shortcode( '[hch_brand_filter]' ); ?>
 <?php echo do_shortcode( '[hch_category_bar]' ); ?>
 
 <?php /* ─ Competitor-style homepage: category tile grid + per-category sections ─ */ ?>
@@ -78,14 +76,19 @@ if ( ! function_exists( 'hch_highlight' ) ) {
 <?php echo hch_block_render_category_sections( array( 'perSection' => 12, 'hideEmpty' => true, 'showViewAll' => true ) ); ?>
 
 <main class="hch-shop" id="primary" role="main" style="padding-top:12px;">
+	<?php
+	$active_cat      = isset( $_GET['hch_cat'] ) ? sanitize_key( wp_unslash( $_GET['hch_cat'] ) ) : '';
+	$active_cat_term = $active_cat ? get_term_by( 'slug', $active_cat, 'product_cat' ) : null;
+	$shop_title      = $active_cat_term ? $active_cat_term->name : __( 'All Parts', 'hch-electric' );
+	?>
 	<div class="hch-shop__head">
-		<div class="hch-shop__title" id="hchShopTitle"><?php esc_html_e( 'All Parts', 'hch-electric' ); ?></div>
+		<div class="hch-shop__title" id="hchShopTitle"><?php echo esc_html( $shop_title ); ?></div>
 		<?php
-		$total = 0;
-		if ( class_exists( 'WooCommerce' ) ) {
-			$counts = wp_count_posts( 'product' );
-			$total  = isset( $counts->publish ) ? (int) $counts->publish : 0;
+		$count_args = array( 'post_type' => 'product', 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids' );
+		if ( $active_cat ) {
+			$count_args['tax_query'] = array( array( 'taxonomy' => 'product_cat', 'field' => 'slug', 'terms' => $active_cat ) );
 		}
+		$total = class_exists( 'WooCommerce' ) ? (int) ( new WP_Query( $count_args ) )->found_posts : 0;
 		?>
 		<div class="hch-shop__count" id="hchShopCount"><?php
 			/* translators: %d: number of products */
@@ -103,6 +106,9 @@ if ( ! function_exists( 'hch_highlight' ) ) {
 			'meta_query'     => WC()->query->get_meta_query(),
 			'tax_query'      => WC()->query->get_tax_query(),
 		);
+		if ( $active_cat ) {
+			$args['tax_query'][] = array( 'taxonomy' => 'product_cat', 'field' => 'slug', 'terms' => $active_cat );
+		}
 		$q = new WP_Query( $args );
 		if ( $q->have_posts() ) : ?>
 			<ul class="products hch-grid columns-6" id="hchProdGrid">

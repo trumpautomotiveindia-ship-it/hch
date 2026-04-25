@@ -1,0 +1,31 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "hch/category-bar",
+	"version": "1.0.0",
+	"title": "HCH Category Bar",
+	"category": "hch-electric",
+	"icon": "category",
+	"description": "Sticky horizontal navigation of WooCommerce product categories with emoji icons.",
+	"keywords": [
+		"category",
+		"nav",
+		"woocommerce",
+		"hch"
+	],
+	"textdomain": "hch-electric",
+	"supports": {
+		"html": false,
+		"reusable": true,
+		"align": [
+			"wide",
+			"full"
+		],
+		"spacing": {
+			"margin": true
+		}
+	},
+	"attributes": {},
+	"example": {},
+	"editorScript": "hch-blocks-editor"
+}

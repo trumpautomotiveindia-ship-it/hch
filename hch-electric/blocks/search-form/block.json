@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "hch/search-form",
+	"version": "1.0.0",
+	"title": "HCH Search Form",
+	"category": "hch-electric",
+	"icon": "search",
+	"description": "WooCommerce-aware product search form with the HCH dark style.",
+	"keywords": ["search", "products", "woocommerce", "hch"],
+	"textdomain": "hch-electric",
+	"supports": { "html": false, "reusable": true },
+	"attributes": {},
+	"example": {},
+	"editorScript": "hch-blocks-editor"
+}

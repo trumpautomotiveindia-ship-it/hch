@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "hch/ticker",
+	"version": "1.0.0",
+	"title": "HCH Announcement Ticker",
+	"category": "hch-electric",
+	"icon": "megaphone",
+	"description": "Scrolling cyan announcement ticker. Edit lines in Customizer → HCH Electric → Top Ticker.",
+	"keywords": ["ticker", "announcement", "marquee", "hch"],
+	"textdomain": "hch-electric",
+	"supports": { "html": false, "reusable": true, "align": ["wide", "full"] },
+	"attributes": {},
+	"example": {},
+	"editorScript": "hch-blocks-editor"
+}

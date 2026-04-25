@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "hch/footer-bottom",
+	"version": "1.0.0",
+	"title": "HCH Footer Bottom Bar",
+	"category": "hch-electric",
+	"icon": "info",
+	"description": "Footer bottom bar with copyright text and disclaimer from Customizer.",
+	"keywords": ["footer", "copyright", "disclaimer", "hch"],
+	"textdomain": "hch-electric",
+	"supports": { "html": false, "reusable": true },
+	"attributes": {},
+	"example": {},
+	"editorScript": "hch-blocks-editor"
+}

@@ -1,0 +1,50 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "hch/category-sections",
+	"version": "1.0.0",
+	"title": "HCH Category Sections",
+	"category": "hch-electric",
+	"icon": "align-wide",
+	"description": "Renders one section per product category with the category name as a clickable heading and a product grid below (each section links to the full category archive).",
+	"keywords": [
+		"category",
+		"sections",
+		"per-category",
+		"woocommerce",
+		"hch"
+	],
+	"textdomain": "hch-electric",
+	"supports": {
+		"html": false,
+		"reusable": true,
+		"align": [
+			"wide",
+			"full"
+		],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"attributes": {
+		"perSection": {
+			"type": "number",
+			"default": 12
+		},
+		"hideEmpty": {
+			"type": "boolean",
+			"default": true
+		},
+		"showViewAll": {
+			"type": "boolean",
+			"default": true
+		},
+		"onlySlugs": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"example": {},
+	"editorScript": "hch-blocks-editor"
+}

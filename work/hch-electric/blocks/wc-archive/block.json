@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "hch/wc-archive",
+	"version": "1.0.0",
+	"title": "HCH Product Archive",
+	"category": "hch-electric",
+	"icon": "store",
+	"description": "WooCommerce product loop for shop/archive pages. Respects active query filters.",
+	"keywords": ["shop", "archive", "products", "woocommerce", "hch"],
+	"textdomain": "hch-electric",
+	"supports": { "html": false, "reusable": true },
+	"attributes": {},
+	"example": {},
+	"editorScript": "hch-blocks-editor"
+}

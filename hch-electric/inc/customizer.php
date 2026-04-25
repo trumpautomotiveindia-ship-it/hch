@@ -43,7 +43,7 @@ function hch_customize_register( $wp_customize ) {
 		'hch_hero_line1'  => array( __( 'Headline line 1', 'hch-electric' ), 'Every EV part.' ),
 		'hch_hero_line2'  => array( __( 'Headline line 2 (cyan)', 'hch-electric' ), 'Every spec.' ),
 		'hch_hero_line3'  => array( __( 'Headline line 3 (green)', 'hch-electric' ), 'One source.' ),
-		'hch_hero_sub'    => array( __( 'Sub-text', 'hch-electric' ), 'Premium aftermarket spare parts for Indian electric scooters, e-rickshaws & e-cycles.' ),
+		'hch_hero_sub'    => array( __( 'Sub-text', 'hch-electric' ), 'Electric Scooters' ),
 	);
 	foreach ( $hero_fields as $id => $meta ) {
 		$wp_customize->add_setting( $id, array( 'default' => $meta[1], 'sanitize_callback' => 'wp_kses_post' ) );

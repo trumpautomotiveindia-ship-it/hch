@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'HCH_VERSION', '2.1.0' );
+define( 'HCH_VERSION', '2.2.0' );
 define( 'HCH_DIR', get_template_directory() );
 define( 'HCH_URL', get_template_directory_uri() );
 
@@ -82,15 +82,7 @@ add_action( 'widgets_init', 'hch_widgets' );
  * Enqueue assets.
  */
 function hch_enqueue() {
-	// Google fonts.
-	wp_enqueue_style(
-		'hch-fonts',
-		'https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap',
-		array(),
-		null
-	);
-
-	wp_enqueue_style( 'hch-style', get_stylesheet_uri(), array( 'hch-fonts' ), filemtime( get_stylesheet_directory() . '/style.css' ) );
+	wp_enqueue_style( 'hch-style', get_stylesheet_uri(), array(), filemtime( get_stylesheet_directory() . '/style.css' ) );
 
 	wp_enqueue_script( 'hch-main', HCH_URL . '/js/hch.js', array( 'jquery' ), filemtime( HCH_DIR . '/js/hch.js' ), true );
 
@@ -275,27 +267,6 @@ function hch_output_cart_drawer() {
 }
 add_action( 'wp_footer', 'hch_output_cart_drawer', 5 );
 
-/**
- * Output the search overlay via wp_footer so it works in both classic and block themes.
- * The search icon button (in header.php or hch/search-form block) toggles this overlay.
- */
-function hch_output_search_overlay() {
-	?>
-	<div class="hch-search-overlay" id="hchSearchOverlay" role="search">
-		<form method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-			<input type="search" class="hch-search-overlay__input"
-				placeholder="<?php esc_attr_e( 'Search parts, specs, SKUs…', 'hch-electric' ); ?>"
-				name="s" value="<?php echo esc_attr( get_search_query() ); ?>" autocomplete="off"/>
-			<?php if ( class_exists( 'WooCommerce' ) ) : ?>
-				<input type="hidden" name="post_type" value="product"/>
-			<?php endif; ?>
-			<button type="button" class="hch-search-overlay__close" id="hchSearchClose"
-				aria-label="<?php esc_attr_e( 'Close search', 'hch-electric' ); ?>">✕</button>
-		</form>
-	</div>
-	<?php
-}
-add_action( 'wp_footer', 'hch_output_search_overlay', 6 );
 
 /**
  * Tell WordPress this is a block theme by declaring template parts for the

@@ -32,7 +32,7 @@ $kicker = get_theme_mod( 'hch_hero_kicker', __( 'B2B SPECIALISTS · PAN-INDIA DI
 $h_line1 = get_theme_mod( 'hch_hero_line1', __( 'Every EV part.', 'hch-electric' ) );
 $h_line2 = get_theme_mod( 'hch_hero_line2', __( 'Every spec.', 'hch-electric' ) );
 $h_line3 = get_theme_mod( 'hch_hero_line3', __( 'One source.', 'hch-electric' ) );
-$hsub   = get_theme_mod( 'hch_hero_sub', __( 'Premium aftermarket spare parts for Indian electric scooters, e-rickshaws & e-cycles.', 'hch-electric' ) );
+$hsub   = get_theme_mod( 'hch_hero_sub', __( 'Electric Scooters', 'hch-electric' ) );
 
 $stats = array(
 	array( get_theme_mod( 'hch_stat1_num', '500+' ), get_theme_mod( 'hch_stat1_lbl', __( 'B2B PARTNERS', 'hch-electric' ) ) ),
@@ -49,7 +49,6 @@ if ( ! function_exists( 'hch_highlight' ) ) {
 ?>
 
 <section class="hch-hero">
-	<div class="hch-hero__kicker"><?php echo esc_html( $kicker ); ?></div>
 	<h1 class="hch-hero__h1">
 		<?php echo hch_highlight( $h_line1 ); ?><br/>
 		<span class="c"><?php echo hch_highlight( $h_line2 ); ?></span><br/>

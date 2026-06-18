@@ -1,0 +1,49 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "hch/category-grid",
+	"version": "1.0.0",
+	"title": "HCH Category Grid",
+	"category": "hch-electric",
+	"icon": "grid-view",
+	"description": "Clickable tile grid of all WooCommerce product categories with images (like the elyf layout). Links to each category archive.",
+	"keywords": [
+		"category",
+		"grid",
+		"tiles",
+		"hch",
+		"woocommerce"
+	],
+	"textdomain": "hch-electric",
+	"supports": {
+		"html": false,
+		"reusable": true,
+		"align": [
+			"wide",
+			"full"
+		],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"attributes": {
+		"columns": {
+			"type": "number",
+			"default": 4
+		},
+		"hideEmpty": {
+			"type": "boolean",
+			"default": false
+		},
+		"showCount": {
+			"type": "boolean",
+			"default": true
+		},
+		"heading": {
+			"type": "string",
+			"default": "SHOP BY CATEGORY"
+		}
+	},
+	"example": {}
+}
